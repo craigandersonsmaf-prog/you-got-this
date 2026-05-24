@@ -82,6 +82,10 @@ const els = {
   openTabButtons: document.querySelectorAll("[data-open-tab]"),
   topActionButtons: document.querySelectorAll(".top-action-button[data-open-tab]"),
   shareButton: document.querySelector("#shareButton"),
+  appAccessGate: document.querySelector("#appAccessGate"),
+  accessPassword: document.querySelector("#accessPassword"),
+  accessButton: document.querySelector("#accessButton"),
+  accessStatus: document.querySelector("#accessStatus"),
   privacyLock: document.querySelector("#privacyLock"),
   pinInput: document.querySelector("#pinInput"),
   unlockButton: document.querySelector("#unlockButton"),
@@ -96,6 +100,11 @@ const els = {
 const themeKey = "grounded-glow:theme";
 const keyPrefix = "grounded-glow:";
 const pinKey = "you-got-this:pin-lock";
+const appAccessKey = "you-got-this:access-granted:v1";
+
+// Change this word in GitHub when you want to change the shared access word.
+// Leave it blank ("") only if you want the app to open without an access word.
+const appAccessPassword = "yougotthis";
 let toastTimer;
 let selectedJournalDate = getLocalDateKey();
 let state = loadDayState(getLocalDateKey());
@@ -522,6 +531,62 @@ function getPinRecord() {
   }
 }
 
+function appAccessRequired() {
+  return appAccessPassword.trim().length > 0;
+}
+
+function hasAppAccess() {
+  return !appAccessRequired() || localStorage.getItem(appAccessKey) === "yes";
+}
+
+function showAppAccessGate() {
+  if (!els.appAccessGate) return;
+  els.appAccessGate.classList.remove("hidden");
+  document.body.classList.add("app-locked");
+  setTimeout(() => els.accessPassword?.focus(), 80);
+}
+
+function hideAppAccessGate() {
+  if (!els.appAccessGate) return;
+  els.appAccessGate.classList.add("hidden");
+  document.body.classList.remove("app-locked");
+  if (els.accessPassword) els.accessPassword.value = "";
+}
+
+function unlockAppAccess() {
+  if (!appAccessRequired()) {
+    hideAppAccessGate();
+    return true;
+  }
+
+  const entered = els.accessPassword.value.trim();
+
+  if (entered === appAccessPassword.trim()) {
+    localStorage.setItem(appAccessKey, "yes");
+    hideAppAccessGate();
+    if (getPinRecord()) {
+      showPrivacyLock();
+    } else {
+      showToast("App opened. You got this.");
+    }
+    return true;
+  }
+
+  els.accessStatus.textContent = "That access word did not match. Check it and try again.";
+  els.accessPassword.select();
+  return false;
+}
+
+function initAppAccessGate() {
+  if (hasAppAccess()) {
+    hideAppAccessGate();
+    return true;
+  }
+
+  showAppAccessGate();
+  return false;
+}
+
 function showPrivacyLock() {
   if (!els.privacyLock) return;
   els.privacyLock.classList.remove("hidden");
@@ -677,6 +742,12 @@ els.themeToggle.addEventListener("click", () => {
 
 els.shareButton.addEventListener("click", shareAppLink);
 
+els.accessButton?.addEventListener("click", unlockAppAccess);
+
+els.accessPassword?.addEventListener("keydown", event => {
+  if (event.key === "Enter") unlockAppAccess();
+});
+
 els.setPinButton.addEventListener("click", setPrivacyPin);
 
 els.unlockButton.addEventListener("click", unlockPrivacy);
@@ -701,8 +772,9 @@ if ("serviceWorker" in navigator) {
 }
 
 initTheme();
+const appAccessReady = initAppAccessGate();
 updatePrivacyUi();
-if (getPinRecord()) showPrivacyLock();
+if (appAccessReady && getPinRecord()) showPrivacyLock();
 els.journalDate.value = selectedJournalDate;
 renderToday();
 loadPersonalJournalForSelectedDate();

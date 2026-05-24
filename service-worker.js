@@ -1,4 +1,4 @@
-const CACHE_NAME = "you-got-this-release-v4-top-menu-share-pin";
+const CACHE_NAME = "you-got-this-release-v5-access-word";
 const APP_ASSETS = [
   "./",
   "./index.html",

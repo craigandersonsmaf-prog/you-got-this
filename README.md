@@ -18,7 +18,30 @@ A positive, mobile-first Progressive Web App for helping people feel grounded th
 - Saves privately in the browser with `localStorage`
 - Works offline after first load
 - Installable as a PWA
+- Shared access word gate before the app opens
+- Useful support numbers visible on the lock screen
 - Ready for Vercel static deployment
+
+
+## Shared access word
+
+This version opens with a simple access word screen so the public link or QR code can be shared separately from the access word.
+
+Default access word:
+
+```text
+yougotthis
+```
+
+To change it, edit `app.js` and find:
+
+```js
+const appAccessPassword = "yougotthis";
+```
+
+Change the word inside the quotes, commit the file in GitHub, and Vercel will redeploy. People who already opened the app may need to refresh or clear the site data if you want the new word to apply to their device.
+
+This is a simple front-end gate for casual/private sharing. It is not the same as secure user accounts because a technical person could inspect the app files. The optional PIN lock still protects the journal on that person’s own device.
 
 ## Run locally
 

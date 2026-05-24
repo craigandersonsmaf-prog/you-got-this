@@ -1388,6 +1388,54 @@ textarea:focus {
   font-size: clamp(1.8rem, 8vw, 2.7rem);
 }
 
+body.app-locked {
+  overflow: hidden;
+}
+
+.access-lock {
+  z-index: 140;
+}
+
+.access-support {
+  margin-top: 18px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background:
+    linear-gradient(135deg, rgba(126, 214, 165, 0.16), rgba(255, 209, 102, 0.12)),
+    rgba(255, 255, 255, 0.38);
+}
+
+:root.dark .access-support {
+  background:
+    linear-gradient(135deg, rgba(126, 214, 165, 0.10), rgba(255, 176, 130, 0.09)),
+    rgba(255, 255, 255, 0.05);
+}
+
+.access-support-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.access-support-links a {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.58);
+  border: 1px solid var(--line);
+  font-size: 0.86rem;
+  font-weight: 950;
+  text-decoration: none;
+}
+
+:root.dark .access-support-links a {
+  background: rgba(255, 255, 255, 0.07);
+}
+
 .lock-input-row,
 .pin-row {
   display: flex;
@@ -1461,5 +1509,9 @@ textarea:focus {
   .lock-input-row .primary-button,
   .pin-row .primary-button {
     width: 100%;
+  }
+
+  .access-support-links {
+    grid-template-columns: 1fr;
   }
 }
