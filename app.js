@@ -711,16 +711,16 @@ els.resetButton.addEventListener("click", () => {
   saveTodayState();
   renderToday();
   loadPersonalJournalForSelectedDate();
-  els.breathButton.innerHTML = '<span class="button-kicker">After your breath</span><span>I’m here — I’ve got this</span>';
+  els.breathButton.innerHTML = '<span class="button-kicker">After your breath</span><span>Press here when ready</span>';
   showToast("Fresh start. No guilt carried over.");
 });
 
 els.breathButton.addEventListener("click", () => {
   state.checkedIn = true;
   saveTodayState();
-  els.breathButton.innerHTML = '<span class="button-kicker">Nice. Breath done.</span><span>I’m grounded and ready</span>';
+  els.breathButton.innerHTML = '<span class="button-kicker">Nice. Breath done.</span><span>You’ve got this.</span>';
   renderProgress();
-  showToast("Good. You arrived back with yourself.");
+  showToast("Nice. You’ve got this.");
 });
 
 els.journalDate.addEventListener("change", () => {
@@ -779,4 +779,4 @@ els.journalDate.value = selectedJournalDate;
 renderToday();
 loadPersonalJournalForSelectedDate();
 renderHistory();
-if (state.checkedIn) els.breathButton.innerHTML = '<span class="button-kicker">Nice. Breath done.</span><span>I’m grounded and ready</span>';
+if (state.checkedIn) els.breathButton.innerHTML = '<span class="button-kicker">Nice. Breath done.</span><span>You’ve got this.</span>';
