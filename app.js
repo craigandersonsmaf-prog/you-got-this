@@ -100,11 +100,11 @@ const els = {
 const themeKey = "grounded-glow:theme";
 const keyPrefix = "grounded-glow:";
 const pinKey = "you-got-this:pin-lock";
-const appAccessKey = "you-got-this:access-granted:v1";
+const appAccessKey = "you-got-this:access-granted:v2";
 
-// Change this word in GitHub when you want to change the shared access word.
-// Leave it blank ("") only if you want the app to open without an access word.
-const appAccessPassword = "yougotthis";
+// Change this code in GitHub when you want to change the shared access code.
+// Leave it blank ("") only if you want the app to open without an access code.
+const appAccessPassword = "45310";
 let toastTimer;
 let selectedJournalDate = getLocalDateKey();
 let state = loadDayState(getLocalDateKey());
@@ -572,7 +572,7 @@ function unlockAppAccess() {
     return true;
   }
 
-  els.accessStatus.textContent = "That access word did not match. Check it and try again.";
+  els.accessStatus.textContent = "That access code did not match. Check it and try again.";
   els.accessPassword.select();
   return false;
 }

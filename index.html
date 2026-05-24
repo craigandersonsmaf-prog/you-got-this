@@ -17,10 +17,10 @@
   <div class="lock-screen access-lock" id="appAccessGate" role="dialog" aria-modal="true" aria-labelledby="accessTitle">
     <section class="lock-card">
       <span class="label">Private app</span>
-      <h2 id="accessTitle">Enter access word</h2>
-      <p>This app is shared by link or QR. Use the access word given separately to open it on this device.</p>
+      <h2 id="accessTitle">Enter access code</h2>
+      <p>This app is shared by link or QR. Use the access code given separately to open it on this device.</p>
       <div class="lock-input-row">
-        <input id="accessPassword" type="password" placeholder="Access word" autocomplete="off" autocapitalize="none" spellcheck="false" />
+        <input id="accessPassword" type="password" placeholder="Access code" inputmode="numeric" pattern="[0-9]*" autocomplete="off" autocapitalize="none" spellcheck="false" />
         <button class="primary-button" id="accessButton" type="button">Open app</button>
       </div>
       <p class="save-status" id="accessStatus">Once opened, this device remembers access.</p>
