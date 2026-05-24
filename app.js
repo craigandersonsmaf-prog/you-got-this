@@ -103,7 +103,7 @@ const pinKey = "you-got-this:pin-lock";
 const appAccessKey = "you-got-this:access-granted:v2";
 
 // Change this code in GitHub when you want to change the shared access code.
-// Leave it blank ("") only if you want the app to open without an access code.
+// The appAccessKey above should stay the same so a phone that has opened once does not get asked again.
 const appAccessPassword = "45310";
 let toastTimer;
 let selectedJournalDate = getLocalDateKey();
@@ -567,7 +567,7 @@ function unlockAppAccess() {
     if (getPinRecord()) {
       showPrivacyLock();
     } else {
-      showToast("App opened. You got this.");
+      showToast("App opened. This phone will remember it.");
     }
     return true;
   }

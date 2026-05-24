@@ -805,7 +805,7 @@ textarea:focus {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 8px;
-  margin: 16px 0 10px;
+  margin: 0 0 10px;
   padding: 8px;
   border: 1px solid var(--line);
   border-radius: 24px;
@@ -1294,9 +1294,9 @@ textarea:focus {
 /* Top menu, share button and privacy lock update */
 .top-actions {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
-  margin: 0 0 10px;
+  margin: 0 0 16px;
 }
 
 .top-action-button {
@@ -1323,7 +1323,7 @@ textarea:focus {
 }
 
 .share-quick {
-  min-width: 104px;
+  min-width: 0;
   color: var(--brand-deep);
   background:
     linear-gradient(135deg, rgba(255, 209, 102, 0.30), rgba(255, 255, 255, 0.58)),
@@ -1367,7 +1367,9 @@ textarea:focus {
 }
 
 .lock-card {
-  width: min(100%, 430px);
+  width: min(100%, 460px);
+  max-height: calc(100vh - 34px);
+  overflow: auto;
   padding: 24px;
   border: 1px solid rgba(255, 240, 222, 0.2);
   border-radius: 30px;
@@ -1375,6 +1377,7 @@ textarea:focus {
     linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 247, 234, 0.92)),
     var(--card);
   box-shadow: 0 28px 80px rgba(0, 0, 0, 0.32);
+  -webkit-overflow-scrolling: touch;
 }
 
 :root.dark .lock-card {
@@ -1394,6 +1397,46 @@ body.app-locked {
 
 .access-lock {
   z-index: 140;
+}
+
+.install-guide {
+  margin-top: 18px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background:
+    linear-gradient(135deg, rgba(255, 209, 102, 0.18), rgba(255, 179, 199, 0.12)),
+    rgba(255, 255, 255, 0.42);
+}
+
+:root.dark .install-guide {
+  background:
+    linear-gradient(135deg, rgba(255, 216, 119, 0.10), rgba(255, 193, 211, 0.08)),
+    rgba(255, 255, 255, 0.05);
+}
+
+.install-guide h3 {
+  margin: 0.2rem 0 0.55rem;
+  font-size: 1.05rem;
+}
+
+.install-steps {
+  display: grid;
+  gap: 8px;
+}
+
+.install-steps p {
+  margin: 0;
+  padding: 10px 11px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.50);
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+:root.dark .install-steps p {
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .access-support {
@@ -1499,6 +1542,15 @@ body.app-locked {
     min-height: 44px;
     border-radius: 16px;
     font-size: 0.78rem;
+  }
+
+  .lock-screen {
+    padding: 14px;
+  }
+
+  .lock-card {
+    padding: 20px;
+    border-radius: 26px;
   }
 
   .lock-input-row,

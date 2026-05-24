@@ -15,15 +15,24 @@
   <div class="sky-glow" aria-hidden="true"></div>
 
   <div class="lock-screen access-lock" id="appAccessGate" role="dialog" aria-modal="true" aria-labelledby="accessTitle">
-    <section class="lock-card">
+    <section class="lock-card access-card">
       <span class="label">Private app</span>
       <h2 id="accessTitle">Enter access code</h2>
-      <p>This app is shared by link or QR. Use the access code given separately to open it on this device.</p>
+      <p>This app is shared by link or QR. Enter the code once on this phone, then it will open normally after that.</p>
       <div class="lock-input-row">
         <input id="accessPassword" type="password" placeholder="Access code" inputmode="numeric" pattern="[0-9]*" autocomplete="off" autocapitalize="none" spellcheck="false" />
         <button class="primary-button" id="accessButton" type="button">Open app</button>
       </div>
-      <p class="save-status" id="accessStatus">Once opened, this device remembers access.</p>
+      <p class="save-status" id="accessStatus">Once accepted, this device remembers access. You will not need the code again unless browser data is cleared.</p>
+
+      <div class="install-guide">
+        <span class="label">Use it like an app</span>
+        <h3>Add to Home Screen</h3>
+        <div class="install-steps">
+          <p><strong>iPhone:</strong> open in Safari, tap Share, then Add to Home Screen.</p>
+          <p><strong>Android:</strong> open in Chrome, tap the menu, then Add to Home screen or Install app.</p>
+        </div>
+      </div>
 
       <div class="access-support">
         <span class="label">Useful now</span>
@@ -53,17 +62,16 @@
 
   <div class="app-shell">
     <header class="hero">
-      <div class="top-actions" aria-label="Quick actions">
-        <button class="top-action-button home-quick active" data-open-tab="today" type="button">Home</button>
-        <button class="top-action-button share-quick" id="shareButton" type="button">Send link</button>
-        <button class="top-action-button support-quick" data-open-tab="crisis" type="button">Support</button>
-      </div>
-
       <nav class="tab-bar" aria-label="Main sections">
         <button class="tab-button active home-tab" data-tab="today" type="button">Home</button>
         <button class="tab-button" data-tab="journal" type="button">Journal</button>
         <button class="tab-button" data-tab="history" type="button">History</button>
       </nav>
+
+      <div class="top-actions" aria-label="Quick actions">
+        <button class="top-action-button share-quick" id="shareButton" type="button">Send link</button>
+        <button class="top-action-button support-quick" data-open-tab="crisis" type="button">Support</button>
+      </div>
 
       <div class="hero-top">
         <div>
@@ -190,8 +198,6 @@
           </div>
           <p class="save-status" id="personalSaveStatus">Saved privately on this device.</p>
         </section>
-      </section>
-
         <section class="card privacy-card">
           <span class="label">Privacy lock</span>
           <h2>Optional PIN for this device</h2>
@@ -209,6 +215,7 @@
 
           <p class="save-status" id="pinStatus">PIN lock is off.</p>
         </section>
+      </section>
 
       <section class="tab-panel" id="historyPanel">
         <section class="card summary-card">
@@ -232,7 +239,7 @@
           <h2>Extra support, quietly here.</h2>
           <p>A private place for useful numbers and local routes when someone needs more support than a checklist or journal can give.</p>
           <div class="urgent-actions">
-            <button class="home-return-button" data-open-tab="today" type="button">Home</button>
+            <button class="home-return-button" data-open-tab="today" type="button">Back home</button>
             <a class="danger-call" href="tel:999">Emergency 999</a>
             <a class="primary-call" href="tel:111">NHS 111</a>
           </div>

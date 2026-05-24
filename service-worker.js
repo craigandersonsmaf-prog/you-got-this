@@ -1,4 +1,4 @@
-const CACHE_NAME = "you-got-this-release-v6-access-code";
+const CACHE_NAME = "you-got-this-release-v8-nav-dedup";
 const APP_ASSETS = [
   "./",
   "./index.html",

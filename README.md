@@ -33,15 +33,24 @@ Default access code:
 45310
 ```
 
-To change it, edit `app.js` and find:
+A person only needs to enter the code once on the same phone/browser. After that, the app remembers access locally and opens normally. They may be asked again if they clear browser data, use a different browser, use a different phone, or remove/reinstall the home screen app.
+
+To change the code, edit `app.js` and find:
 
 ```js
 const appAccessPassword = "45310";
 ```
 
-Change the code inside the quotes, commit the file in GitHub, and Vercel will redeploy. People who already opened the app may need to refresh or clear the site data if you want the new word to apply to their device.
+Change the code inside the quotes, commit the file in GitHub, and Vercel will redeploy. Keep `appAccessKey` the same if you do not want people who already opened the app to be asked again.
 
 This is a simple front-end gate for casual/private sharing. It is not the same as secure user accounts because a technical person could inspect the app files. The optional PIN lock still protects the journal on that person’s own device.
+
+## Add to Home Screen instructions
+
+The access screen now includes quick install instructions:
+
+- iPhone: open the link in Safari, tap Share, then Add to Home Screen.
+- Android: open the link in Chrome, tap the menu, then Add to Home screen or Install app.
 
 ## Run locally
 
@@ -122,3 +131,10 @@ This release uses the public app name **You Got This**.
 - Added an optional local PIN lock for casual privacy on the user's own device.
 
 Security note: the PIN lock is a simple device-level privacy screen. It helps stop casual viewing if someone opens the app, but it does not encrypt journal data or replace proper device security.
+
+
+## Latest update
+
+- Access code is clearly explained as a one-time entry per phone/browser.
+- Added Add to Home Screen instructions directly on the access screen.
+- Kept the same access memory key so existing unlocked devices are not asked again.
