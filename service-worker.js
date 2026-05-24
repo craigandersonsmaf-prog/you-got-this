@@ -1,4 +1,4 @@
-const CACHE_NAME = "you-got-this-release-v3-home-button";
+const CACHE_NAME = "you-got-this-release-v4-top-menu-share-pin";
 const APP_ASSETS = [
   "./",
   "./index.html",

@@ -148,7 +148,8 @@ p {
 .soft-button,
 .primary-button,
 .add-row button,
-.prompt-button {
+.prompt-button,
+.top-action-button {
   border: 0;
   cursor: pointer;
   transition: transform 160ms ease, filter 160ms ease, background 160ms ease;
@@ -159,6 +160,7 @@ p {
 .primary-button:active,
 .add-row button:active,
 .prompt-button:active,
+.top-action-button:active,
 .check-button:active {
   transform: scale(0.97);
 }
@@ -1285,5 +1287,179 @@ textarea:focus {
 
   .tab-button {
     font-size: 0.76rem;
+  }
+}
+
+
+/* Top menu, share button and privacy lock update */
+.top-actions {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 8px;
+  margin: 0 0 10px;
+}
+
+.top-action-button {
+  min-height: 46px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.62);
+  box-shadow: var(--soft-shadow);
+  font-size: 0.86rem;
+  font-weight: 950;
+  cursor: pointer;
+}
+
+:root.dark .top-action-button {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.top-action-button.active,
+.top-action-button:hover {
+  background:
+    linear-gradient(135deg, rgba(255, 209, 102, 0.58), rgba(255, 159, 110, 0.30)),
+    var(--card);
+}
+
+.share-quick {
+  min-width: 104px;
+  color: var(--brand-deep);
+  background:
+    linear-gradient(135deg, rgba(255, 209, 102, 0.30), rgba(255, 255, 255, 0.58)),
+    var(--card);
+}
+
+.support-quick {
+  justify-self: stretch;
+  background:
+    linear-gradient(135deg, rgba(255, 179, 199, 0.22), rgba(255, 255, 255, 0.58)),
+    var(--card);
+}
+
+:root.dark .share-quick,
+:root.dark .support-quick {
+  background:
+    linear-gradient(135deg, rgba(255, 176, 130, 0.14), rgba(255, 255, 255, 0.06)),
+    var(--card);
+}
+
+.tab-bar {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0 0 16px;
+}
+
+.lock-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(circle at top left, rgba(255, 209, 102, 0.28), transparent 24rem),
+    rgba(23, 18, 15, 0.72);
+  backdrop-filter: blur(18px);
+}
+
+.lock-screen.hidden {
+  display: none;
+}
+
+.lock-card {
+  width: min(100%, 430px);
+  padding: 24px;
+  border: 1px solid rgba(255, 240, 222, 0.2);
+  border-radius: 30px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 247, 234, 0.92)),
+    var(--card);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.32);
+}
+
+:root.dark .lock-card {
+  background:
+    linear-gradient(135deg, rgba(43, 32, 25, 0.96), rgba(30, 23, 19, 0.94)),
+    var(--card);
+}
+
+.lock-card h2 {
+  margin: 0.2rem 0 0.6rem;
+  font-size: clamp(1.8rem, 8vw, 2.7rem);
+}
+
+.lock-input-row,
+.pin-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.lock-input-row input,
+.pin-row input {
+  min-width: 0;
+  width: 100%;
+  min-height: 52px;
+  border: 1px solid var(--line);
+  border-radius: 19px;
+  padding: 0 15px;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.56);
+  outline: none;
+  font-weight: 900;
+}
+
+:root.dark .lock-input-row input,
+:root.dark .pin-row input {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.privacy-card {
+  margin-top: 16px;
+  background:
+    linear-gradient(135deg, rgba(126, 214, 165, 0.18), rgba(255, 209, 102, 0.12)),
+    var(--card);
+}
+
+.privacy-card h2 {
+  margin: 0.25rem 0 0.6rem;
+}
+
+.privacy-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.remove-pin-button {
+  color: #9b4535;
+  background: rgba(255, 159, 110, 0.12);
+}
+
+:root.dark .remove-pin-button {
+  color: #ffc6b8;
+}
+
+@media (max-width: 430px) {
+  .top-actions {
+    grid-template-columns: 1fr 1.05fr 1fr;
+    gap: 7px;
+  }
+
+  .top-action-button {
+    min-height: 44px;
+    border-radius: 16px;
+    font-size: 0.78rem;
+  }
+
+  .lock-input-row,
+  .pin-row {
+    flex-direction: column;
+  }
+
+  .lock-input-row .primary-button,
+  .pin-row .primary-button {
+    width: 100%;
   }
 }

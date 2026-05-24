@@ -79,11 +79,23 @@ const els = {
   personalSaveStatus: document.querySelector("#personalSaveStatus"),
   summaryGrid: document.querySelector("#summaryGrid"),
   historyList: document.querySelector("#historyList"),
-  openTabButtons: document.querySelectorAll("[data-open-tab]")
+  openTabButtons: document.querySelectorAll("[data-open-tab]"),
+  topActionButtons: document.querySelectorAll(".top-action-button[data-open-tab]"),
+  shareButton: document.querySelector("#shareButton"),
+  privacyLock: document.querySelector("#privacyLock"),
+  pinInput: document.querySelector("#pinInput"),
+  unlockButton: document.querySelector("#unlockButton"),
+  lockStatus: document.querySelector("#lockStatus"),
+  newPin: document.querySelector("#newPin"),
+  setPinButton: document.querySelector("#setPinButton"),
+  lockNowButton: document.querySelector("#lockNowButton"),
+  removePinButton: document.querySelector("#removePinButton"),
+  pinStatus: document.querySelector("#pinStatus")
 };
 
 const themeKey = "grounded-glow:theme";
 const keyPrefix = "grounded-glow:";
+const pinKey = "you-got-this:pin-lock";
 let toastTimer;
 let selectedJournalDate = getLocalDateKey();
 let state = loadDayState(getLocalDateKey());
@@ -420,6 +432,7 @@ function renderHistory() {
 
 function switchTab(tabName) {
   els.tabButtons.forEach(button => button.classList.toggle("active", button.dataset.tab === tabName));
+  els.topActionButtons.forEach(button => button.classList.toggle("active", button.dataset.openTab === tabName));
   els.tabPanels.forEach(panel => panel.classList.toggle("active", panel.id === `${tabName}Panel`));
   if (tabName === "journal") loadPersonalJournalForSelectedDate();
   if (tabName === "history") renderHistory();
@@ -445,6 +458,138 @@ function initTheme() {
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   setTheme(saved || legacy || (prefersDark ? "dark" : "light"));
 }
+
+function getShareUrl() {
+  const url = new URL(window.location.href);
+  url.hash = "";
+  return url.toString();
+}
+
+async function shareAppLink() {
+  const shareData = {
+    title: "You Got This",
+    text: "A quiet daily grounding app with positive check-ins, private journaling and support info.",
+    url: getShareUrl()
+  };
+
+  try {
+    if (navigator.share) {
+      await navigator.share(shareData);
+      return;
+    }
+
+    await navigator.clipboard.writeText(shareData.url);
+    showToast("Link copied. You can paste it into a message.");
+  } catch {
+    showToast("Could not send link just now. Copy the address from the browser.");
+  }
+}
+
+function makeSalt() {
+  const bytes = new Uint8Array(12);
+  if (window.crypto && window.crypto.getRandomValues) {
+    window.crypto.getRandomValues(bytes);
+  } else {
+    bytes.forEach((_, index) => bytes[index] = Math.floor(Math.random() * 256));
+  }
+  return Array.from(bytes).map(byte => byte.toString(16).padStart(2, "0")).join("");
+}
+
+async function digestText(value) {
+  if (window.crypto && window.crypto.subtle && window.TextEncoder) {
+    const data = new TextEncoder().encode(value);
+    const hash = await window.crypto.subtle.digest("SHA-256", data);
+    return Array.from(new Uint8Array(hash)).map(byte => byte.toString(16).padStart(2, "0")).join("");
+  }
+
+  return btoa(unescape(encodeURIComponent(value)));
+}
+
+async function hashPin(pin, salt) {
+  return digestText(`${salt}:${pin}`);
+}
+
+function getPinRecord() {
+  const saved = localStorage.getItem(pinKey);
+  if (!saved) return null;
+
+  try {
+    const parsed = JSON.parse(saved);
+    return parsed && parsed.salt && parsed.hash ? parsed : null;
+  } catch {
+    localStorage.removeItem(pinKey);
+    return null;
+  }
+}
+
+function showPrivacyLock() {
+  if (!els.privacyLock) return;
+  els.privacyLock.classList.remove("hidden");
+  els.lockStatus.textContent = "Enter your PIN to unlock this device.";
+  setTimeout(() => els.pinInput?.focus(), 80);
+}
+
+function hidePrivacyLock() {
+  if (!els.privacyLock) return;
+  els.privacyLock.classList.add("hidden");
+  if (els.pinInput) els.pinInput.value = "";
+}
+
+function updatePrivacyUi() {
+  if (!els.pinStatus) return;
+  const enabled = Boolean(getPinRecord());
+  els.pinStatus.textContent = enabled ? "PIN lock is on for this device." : "PIN lock is off.";
+  els.setPinButton.textContent = enabled ? "Change PIN" : "Set PIN";
+  els.lockNowButton.hidden = !enabled;
+  els.removePinButton.hidden = !enabled;
+}
+
+async function setPrivacyPin() {
+  const pin = els.newPin.value.trim();
+
+  if (!/^\d{4,8}$/.test(pin)) {
+    els.pinStatus.textContent = "Choose a PIN using 4 to 8 numbers.";
+    els.newPin.focus();
+    return;
+  }
+
+  const salt = makeSalt();
+  const hash = await hashPin(pin, salt);
+  localStorage.setItem(pinKey, JSON.stringify({ salt, hash, updatedAt: new Date().toISOString() }));
+  els.newPin.value = "";
+  updatePrivacyUi();
+  showToast("PIN lock is now on.");
+}
+
+async function unlockPrivacy() {
+  const record = getPinRecord();
+  if (!record) {
+    hidePrivacyLock();
+    return;
+  }
+
+  const pin = els.pinInput.value.trim();
+  const hash = await hashPin(pin, record.salt);
+
+  if (hash === record.hash) {
+    hidePrivacyLock();
+    showToast("Unlocked.");
+  } else {
+    els.lockStatus.textContent = "That PIN did not match. Try again.";
+    els.pinInput.select();
+  }
+}
+
+function removePrivacyPin() {
+  const confirmed = window.confirm("Remove the PIN lock from this device?");
+  if (!confirmed) return;
+
+  localStorage.removeItem(pinKey);
+  updatePrivacyUi();
+  hidePrivacyLock();
+  showToast("PIN lock removed.");
+}
+
 
 els.tabButtons.forEach(button => {
   button.addEventListener("click", () => switchTab(button.dataset.tab));
@@ -530,6 +675,25 @@ els.themeToggle.addEventListener("click", () => {
   setTheme(isDark ? "light" : "dark");
 });
 
+els.shareButton.addEventListener("click", shareAppLink);
+
+els.setPinButton.addEventListener("click", setPrivacyPin);
+
+els.unlockButton.addEventListener("click", unlockPrivacy);
+
+els.pinInput.addEventListener("keydown", event => {
+  if (event.key === "Enter") unlockPrivacy();
+});
+
+els.newPin.addEventListener("keydown", event => {
+  if (event.key === "Enter") setPrivacyPin();
+});
+
+els.lockNowButton.addEventListener("click", showPrivacyLock);
+
+els.removePinButton.addEventListener("click", removePrivacyPin);
+
+
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("./service-worker.js");
@@ -537,6 +701,8 @@ if ("serviceWorker" in navigator) {
 }
 
 initTheme();
+updatePrivacyUi();
+if (getPinRecord()) showPrivacyLock();
 els.journalDate.value = selectedJournalDate;
 renderToday();
 loadPersonalJournalForSelectedDate();

@@ -14,8 +14,33 @@
 <body>
   <div class="sky-glow" aria-hidden="true"></div>
 
+  <div class="lock-screen hidden" id="privacyLock" role="dialog" aria-modal="true" aria-labelledby="lockTitle">
+    <section class="lock-card">
+      <span class="label">Private space</span>
+      <h2 id="lockTitle">You Got This is locked</h2>
+      <p>Enter your PIN to open your journal and saved days on this device.</p>
+      <div class="lock-input-row">
+        <input id="pinInput" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="8" placeholder="Your PIN" autocomplete="off" />
+        <button class="primary-button" id="unlockButton" type="button">Unlock</button>
+      </div>
+      <p class="save-status" id="lockStatus">This is a simple local privacy lock for this device.</p>
+    </section>
+  </div>
+
   <div class="app-shell">
     <header class="hero">
+      <div class="top-actions" aria-label="Quick actions">
+        <button class="top-action-button home-quick active" data-open-tab="today" type="button">Home</button>
+        <button class="top-action-button share-quick" id="shareButton" type="button">Send link</button>
+        <button class="top-action-button support-quick" data-open-tab="crisis" type="button">Support</button>
+      </div>
+
+      <nav class="tab-bar" aria-label="Main sections">
+        <button class="tab-button active home-tab" data-tab="today" type="button">Home</button>
+        <button class="tab-button" data-tab="journal" type="button">Journal</button>
+        <button class="tab-button" data-tab="history" type="button">History</button>
+      </nav>
+
       <div class="hero-top">
         <div>
           <p class="eyebrow">You Got This</p>
@@ -60,13 +85,6 @@
         </div>
         <div class="mood-grid" id="moodGrid" aria-label="Choose your current mood"></div>
       </section>
-
-      <nav class="tab-bar" aria-label="Main sections">
-        <button class="tab-button crisis-tab" data-tab="crisis" type="button">Support</button>
-        <button class="tab-button active home-tab" data-tab="today" type="button">Home</button>
-        <button class="tab-button" data-tab="journal" type="button">Journal</button>
-        <button class="tab-button" data-tab="history" type="button">History</button>
-      </nav>
     </header>
 
     <main>
@@ -149,6 +167,24 @@
           <p class="save-status" id="personalSaveStatus">Saved privately on this device.</p>
         </section>
       </section>
+
+        <section class="card privacy-card">
+          <span class="label">Privacy lock</span>
+          <h2>Optional PIN for this device</h2>
+          <p>A PIN can help keep your journal private if someone opens the app on your phone. It is a simple local lock, not bank-level security.</p>
+
+          <div class="pin-row">
+            <input id="newPin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="8" placeholder="Choose 4–8 digits" autocomplete="off" />
+            <button class="primary-button small-save" id="setPinButton" type="button">Set PIN</button>
+          </div>
+
+          <div class="privacy-actions">
+            <button class="soft-button" id="lockNowButton" type="button">Lock now</button>
+            <button class="soft-button remove-pin-button" id="removePinButton" type="button">Remove PIN</button>
+          </div>
+
+          <p class="save-status" id="pinStatus">PIN lock is off.</p>
+        </section>
 
       <section class="tab-panel" id="historyPanel">
         <section class="card summary-card">

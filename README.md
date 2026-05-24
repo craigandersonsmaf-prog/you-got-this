@@ -89,3 +89,13 @@ This release uses the public app name **You Got This**.
 ## Latest update
 
 - Added a clear Home button/tab so users can quickly return to the daily grounding screen.
+
+
+## Latest update
+
+- Top quick actions now show **Home** on the left and **Support** on the right.
+- Main menu now sits at the top and only includes **Home**, **Journal**, and **History**.
+- Added a **Send link** button using the phone/browser share sheet where available.
+- Added an optional local PIN lock for casual privacy on the user's own device.
+
+Security note: the PIN lock is a simple device-level privacy screen. It helps stop casual viewing if someone opens the app, but it does not encrypt journal data or replace proper device security.
