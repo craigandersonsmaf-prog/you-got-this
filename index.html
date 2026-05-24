@@ -43,6 +43,15 @@
         </div>
       </section>
 
+      <section class="support-strip" aria-label="Quick access to support">
+        <div>
+          <span class="label">Support</span>
+          <strong>Extra support is right here.</strong>
+          <p>Quiet numbers, local routes and safe options if today needs more.</p>
+        </div>
+        <button class="support-strip-button" data-open-tab="crisis" type="button">Open</button>
+      </section>
+
       <section class="card mood-card">
         <div>
           <span class="label">Right now</span>
@@ -53,10 +62,10 @@
       </section>
 
       <nav class="tab-bar" aria-label="Main sections">
-        <button class="tab-button active" data-tab="today" type="button">Today</button>
-        <button class="tab-button" data-tab="journal" type="button">Personal journal</button>
-        <button class="tab-button" data-tab="history" type="button">History</button>
         <button class="tab-button crisis-tab" data-tab="crisis" type="button">Support</button>
+        <button class="tab-button active home-tab" data-tab="today" type="button">Home</button>
+        <button class="tab-button" data-tab="journal" type="button">Journal</button>
+        <button class="tab-button" data-tab="history" type="button">History</button>
       </nav>
     </header>
 
@@ -163,6 +172,7 @@
           <h2>Extra support, quietly here.</h2>
           <p>A private place for useful numbers and local routes when someone needs more support than a checklist or journal can give.</p>
           <div class="urgent-actions">
+            <button class="home-return-button" data-open-tab="today" type="button">Home</button>
             <a class="danger-call" href="tel:999">Emergency 999</a>
             <a class="primary-call" href="tel:111">NHS 111</a>
           </div>

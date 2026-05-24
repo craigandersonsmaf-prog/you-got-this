@@ -78,7 +78,8 @@ const els = {
   personalSaveButton: document.querySelector("#personalSaveButton"),
   personalSaveStatus: document.querySelector("#personalSaveStatus"),
   summaryGrid: document.querySelector("#summaryGrid"),
-  historyList: document.querySelector("#historyList")
+  historyList: document.querySelector("#historyList"),
+  openTabButtons: document.querySelectorAll("[data-open-tab]")
 };
 
 const themeKey = "grounded-glow:theme";
@@ -448,6 +449,14 @@ function initTheme() {
 els.tabButtons.forEach(button => {
   button.addEventListener("click", () => switchTab(button.dataset.tab));
 });
+
+els.openTabButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    switchTab(button.dataset.openTab);
+    document.querySelector(".tab-bar").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+});
+
 
 els.addForm.addEventListener("submit", event => {
   event.preventDefault();

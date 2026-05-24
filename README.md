@@ -84,3 +84,8 @@ The Support tab now has clear Male support, Female support, and Anyone / emergen
 ## Final public name
 
 This release uses the public app name **You Got This**.
+
+
+## Latest update
+
+- Added a clear Home button/tab so users can quickly return to the daily grounding screen.
