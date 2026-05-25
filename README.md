@@ -138,3 +138,25 @@ Security note: the PIN lock is a simple device-level privacy screen. It helps st
 - Access code is clearly explained as a one-time entry per phone/browser.
 - Added Add to Home Screen instructions directly on the access screen.
 - Kept the same access memory key so existing unlocked devices are not asked again.
+
+
+## Latest update
+
+- Dedicated Journal screen with a Back home button.
+- Home now shows an Open journal card instead of the full journal form.
+- Positive notes and personal journal entries still save privately on this device.
+
+## Latest update
+
+- Reworked the app to feel more like a polished iPhone-style PWA.
+- Support now opens as a dedicated screen from the Support button.
+- Redesigned Support into clear, professional sections: Talk now, Men, Women, and Housing tonight.
+- Fixed wide-browser layout issues so the app keeps a clean mobile-app feel.
+- Updated the service worker cache version.
+
+
+## Home screen install note
+
+This release includes the home-screen launch fix. After Vercel redeploys, open the live link in Safari/Chrome once before adding it to the home screen.
+
+If an older home-screen icon does not open, delete that old icon from the phone and add it again from the updated live link.
