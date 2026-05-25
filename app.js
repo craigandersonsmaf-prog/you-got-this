@@ -286,6 +286,13 @@ function renderProgress() {
   } else {
     els.dayMood.textContent = state.checkedIn ? "Ready" : "Hopeful";
   }
+
+  const winsCopy = document.querySelector("#winsProgressCopy");
+  if (winsCopy) {
+    winsCopy.textContent = completed
+      ? `${completed} ${completed === 1 ? "win" : "wins"} collected today.`
+      : "Small wins matter.";
+  }
 }
 
 function renderPositiveJournal() {
@@ -449,6 +456,7 @@ function switchTab(tabName) {
   if (tabName === "journal") loadPersonalJournalForSelectedDate();
   if (tabName === "history") renderHistory();
   if (tabName === "share") updateShareLinkDisplay();
+  requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: "smooth" }));
 }
 
 function setTheme(theme) {
@@ -469,7 +477,7 @@ function initTheme() {
   const saved = localStorage.getItem(themeKey);
   const legacy = localStorage.getItem("grounded-journal:theme");
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  setTheme(saved || legacy || (prefersDark ? "dark" : "light"));
+  setTheme(saved || legacy || "dark");
 }
 
 function getShareUrl() {

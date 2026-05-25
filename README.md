@@ -1,32 +1,34 @@
 # You Got This
 
-A positive, mobile-first Progressive Web App for helping people feel grounded through easy daily wins, emoji mood check-ins, positive notes, a private daily journal, and quiet support resources.
+A polished, mobile-first Progressive Web App for helping people feel grounded through daily wins, emoji mood check-ins, private journaling, history, sharing, and quiet support resources.
 
-## What it does
+## Current build
 
-- Positive daily tick list
-- Basic emoji mood check-in at the beginning
-- Encouraging micro-celebrations when users complete wins
-- Bright daily affirmation
-- Add your own custom win
-- Positive journal prompt with a clear save button
-- Separate personal journal tab for each day
-- Date picker to go back and write for previous days
-- History tab with past entries
-- Weekly and monthly summary cards
-- Light and dark mode with visible labels
-- Saves privately in the browser with `localStorage`
-- Works offline after first load
-- Installable as a PWA
-- Shared access code gate before the app opens
-- Useful support numbers visible on the lock screen
-- Ready for Vercel static deployment
-- Responsive desktop layout that turns the app into a polished two-column dashboard on PC
+This build focuses on layout and visual polish without changing the saved data format.
 
+- Premium iPhone-style app shell
+- Mobile full-screen PWA layout
+- Desktop/tablet centred phone-style app container
+- No stretched desktop layout
+- Clean top navigation: Home / Journal / History
+- Dedicated screens for:
+  - Mood check-in
+  - Daily wins
+  - Journal
+  - History
+  - Support
+  - Send link
+- Support rebuilt as polished cards and sections
+- Journal rebuilt as a dedicated calm writing screen
+- Bottom bar removed
+- Home dashboard cleaned up with large cards
+- Warm dark theme with gold/brown accents
+- Light mode still available
+- PWA manifest and service worker checked for home-screen launch
 
 ## Shared access code
 
-This version opens with a simple access code screen so the public link or QR code can be shared separately from the access code.
+The app opens with a simple access code screen so the public link or QR code can be shared separately from the access code.
 
 Default access code:
 
@@ -42,16 +44,30 @@ To change the code, edit `app.js` and find:
 const appAccessPassword = "45310";
 ```
 
-Change the code inside the quotes, commit the file in GitHub, and Vercel will redeploy. Keep `appAccessKey` the same if you do not want people who already opened the app to be asked again.
+Keep `appAccessKey` the same if people who already opened the app should not be asked again.
 
-This is a simple front-end gate for casual/private sharing. It is not the same as secure user accounts because a technical person could inspect the app files. The optional PIN lock still protects the journal on that person’s own device.
+This is a simple front-end access gate for private sharing. It is not the same as secure user accounts because a technical person could inspect the app files. The optional PIN lock helps keep the journal private on that person’s own device.
 
-## Add to Home Screen instructions
+## Add to Home Screen
 
-The access screen now includes quick install instructions:
+The access screen and Send Link screen include install instructions.
 
-- iPhone: open the link in Safari, tap Share, then Add to Home Screen.
-- Android: open the link in Chrome, tap the menu, then Add to Home screen or Install app.
+iPhone:
+
+```text
+Open the live link in Safari
+Tap Share
+Tap Add to Home Screen
+Tap Add
+```
+
+Android:
+
+```text
+Open the live link in Chrome
+Tap the menu
+Tap Add to Home screen / Install app
+```
 
 ## Run locally
 
@@ -69,11 +85,10 @@ http://localhost:8000
 
 ## Deploy to Vercel
 
-1. Upload this folder to a GitHub repository.
-2. Go to Vercel.
-3. Import the repository.
-4. Use the default static site settings.
-5. Deploy.
+1. Upload this folder to the GitHub repository.
+2. Commit the change.
+3. Vercel should redeploy automatically.
+4. After the new deployment, delete the old phone home-screen icon and add the app again if the old PWA icon does not open correctly.
 
 No build command is needed.
 
@@ -92,79 +107,28 @@ you-got-this/
 └── data/
 ```
 
-## Notes
+## Data and privacy
 
-All entries are stored locally in the user's browser. This keeps version 1 simple, private, offline-friendly, and ready to grow later with optional cloud sync.
-
+All journal entries, mood check-ins, wins and PIN details are stored locally in the user's browser using localStorage. This keeps version 1 simple, private, offline-friendly, and ready to grow later with optional cloud sync.
 
 ## Support section
 
-This build includes a quick-access support tab for:
+This build includes quiet support information for:
+
 - emergency danger
 - urgent mental health support
-- local Bradford, Airedale, Wharfedale and Craven crisis support
-- homelessness and emergency accommodation around Skipton, Keighley and the wider nearby area
-- domestic abuse and immediate safety
+- Bradford, Airedale, Wharfedale and Craven First Response
+- Samaritans
+- Shout text support
+- CALM
+- ANDYSMANCLUB
+- domestic abuse routes
+- local homelessness and emergency accommodation around Skipton, Craven, Keighley and Bradford
 
-Important: phone numbers and service availability can change. Before using publicly, check all crisis details with the relevant official organisations and update the app regularly.
-
-
-## Latest update
-
-The Support tab now has clear Male support, Female support, and Anyone / emergency housing sections.
-
-
-## Final public name
-
-This release uses the public app name **You Got This**.
+Important: phone numbers and service availability can change. Before sharing widely, check all support details with the relevant official organisations and update the app regularly.
 
 
-## Earlier update
-
-- Added a clear Home button/tab so users can quickly return to the daily grounding screen.
+Update note: v16 scroll shell fix keeps the header/nav separate from the main scroll area so content does not slide underneath the top navigation.
 
 
-## Latest update
-
-- Top quick actions now show **Home** on the left and **Support** on the right.
-- Main menu now sits at the top and only includes **Home**, **Journal**, and **History**.
-- Added a **Send link** button using the phone/browser share sheet where available.
-- Added an optional local PIN lock for casual privacy on the user's own device.
-
-Security note: the PIN lock is a simple device-level privacy screen. It helps stop casual viewing if someone opens the app, but it does not encrypt journal data or replace proper device security.
-
-
-## Latest update
-
-- Access code is clearly explained as a one-time entry per phone/browser.
-- Added Add to Home Screen instructions directly on the access screen.
-- Kept the same access memory key so existing unlocked devices are not asked again.
-
-
-## Latest update
-
-- Dedicated Journal screen with a Back home button.
-- Home now shows an Open journal card instead of the full journal form.
-- Positive notes and personal journal entries still save privately on this device.
-
-## Latest update
-
-- Reworked the app to feel more like a polished iPhone-style PWA.
-- Support now opens as a dedicated screen from the Support button.
-- Redesigned Support into clear, professional sections: Talk now, Men, Women, and Housing tonight.
-- Fixed wide-browser layout issues so the app keeps a clean mobile-app feel.
-- Updated the service worker cache version.
-
-
-## Home screen install note
-
-This release includes the home-screen launch fix. After Vercel redeploys, open the live link in Safari/Chrome once before adding it to the home screen.
-
-If an older home-screen icon does not open, delete that old icon from the phone and add it again from the updated live link.
-
-## Latest update
-
-- Main menu stays at the very top with **Home**, **Journal**, and **History**.
-- **Journal**, **Support**, and **Send link** now open as their own dedicated screens instead of sharing the Home screen.
-- The bottom daily progress bar only shows on Home, so Journal and Support feel cleaner.
-- Desktop/PC view now keeps the app inside an iPhone-style frame instead of stretching across the browser.
+Update note: v17 widens the desktop/tablet layout into a polished centred app container while keeping mobile full-screen and preserving the scroll-shell fix.

@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#ff9f6e" />
+  <meta name="theme-color" content="#17110d" />
   <meta name="apple-mobile-web-app-title" content="You Got This" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="description" content="A positive daily grounding journal for small wins, feelings, private daily notes, and quiet support." />
   <link rel="manifest" href="./manifest.json" />
@@ -15,15 +15,19 @@
   <title>You Got This</title>
 </head>
 <body>
-  <div class="sky-glow" aria-hidden="true"></div>
+  <div class="ambient-glow" aria-hidden="true"></div>
 
   <div class="lock-screen access-lock" id="appAccessGate" role="dialog" aria-modal="true" aria-labelledby="accessTitle">
     <section class="lock-card access-card">
-      <span class="label">Private app</span>
+      <div class="brand-chip">
+        <span class="brand-mark">✓</span>
+        <span>You Got This</span>
+      </div>
+      <span class="label">Private access</span>
       <h2 id="accessTitle">Enter access code</h2>
       <p>This app is shared by link or QR. Enter the code once on this phone, then it will open normally after that.</p>
       <div class="lock-input-row">
-        <input id="accessPassword" type="password" placeholder="Access code" inputmode="numeric" pattern="[0-9]*" autocomplete="off" autocapitalize="none" spellcheck="false" />
+        <input id="accessPassword" type="password" placeholder="45310" inputmode="numeric" pattern="[0-9]*" autocomplete="off" autocapitalize="none" spellcheck="false" />
         <button class="primary-button" id="accessButton" type="button">Open app</button>
       </div>
       <p class="save-status" id="accessStatus">Once accepted, this device remembers access. You will not need the code again unless browser data is cleared.</p>
@@ -39,7 +43,7 @@
 
       <div class="access-support">
         <span class="label">Useful now</span>
-        <p>Support numbers are still here if someone needs them before opening the app.</p>
+        <p>Quiet numbers are still available before opening the app.</p>
         <div class="access-support-links">
           <a href="tel:999">999</a>
           <a href="tel:111">NHS 111</a>
@@ -63,42 +67,38 @@
     </section>
   </div>
 
-  <div class="app-shell">
-    <header class="app-header">
-      <nav class="tab-bar" aria-label="Main sections">
-        <button class="tab-button active home-tab" data-tab="today" type="button">Home</button>
-        <button class="tab-button" data-tab="journal" type="button">Journal</button>
-        <button class="tab-button" data-tab="history" type="button">History</button>
-      </nav>
-
-      <div class="top-actions" aria-label="Quick actions">
-        <button class="top-action-button share-quick" data-open-tab="share" type="button">Send link</button>
-        <button class="top-action-button support-quick" data-open-tab="crisis" type="button">Support</button>
-      </div>
-    </header>
-
-    <main>
-      <section class="tab-panel active screen-panel home-screen" id="todayPanel">
-        <section class="home-hero">
-          <div class="hero-top">
+  <div class="app-frame">
+    <div class="app-shell">
+      <header class="app-header">
+        <div class="brand-row">
+          <div class="brand-lockup" aria-label="You Got This">
+            <span class="brand-mark">✓</span>
             <div>
-              <p class="eyebrow">You Got This</p>
-              <h1>You got this.</h1>
+              <strong>You Got This</strong>
+              <small>Private daily grounding</small>
             </div>
-            <button class="icon-button theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
-              <span class="theme-icon" aria-hidden="true">☾</span>
-              <span class="theme-label">Dark mode</span>
-            </button>
           </div>
+          <button class="icon-button theme-toggle" id="themeToggle" aria-label="Switch to light mode">
+            <span class="theme-icon" aria-hidden="true">☼</span>
+            <span class="theme-label">Light mode</span>
+          </button>
+        </div>
 
-          <section class="hero-card">
-            <div>
-              <span class="label">Today’s good energy</span>
-              <strong id="todayLabel">Loading…</strong>
+        <nav class="tab-bar" aria-label="Main sections">
+          <button class="tab-button active" data-tab="today" type="button">Home</button>
+          <button class="tab-button" data-tab="journal" type="button">Journal</button>
+          <button class="tab-button" data-tab="history" type="button">History</button>
+        </nav>
+      </header>
+
+      <main class="screen-stack">
+        <section class="tab-panel active screen-panel home-screen" id="todayPanel">
+          <section class="hero-card home-hero-card">
+            <div class="hero-copy">
+              <span class="eyebrow">You got this</span>
+              <h1>You got this.</h1>
               <p id="dailyAffirmation">Small steps count. Every single one.</p>
-              <p class="privacy-line">Private on your device.</p>
             </div>
-
             <div class="progress-ring" aria-label="Daily completion progress">
               <svg viewBox="0 0 44 44" role="img" aria-hidden="true">
                 <circle class="ring-bg" cx="22" cy="22" r="18"></circle>
@@ -108,471 +108,442 @@
             </div>
           </section>
 
+          <section class="daily-card">
+            <div>
+              <span class="label">Today’s good energy</span>
+              <strong id="todayLabel">Loading…</strong>
+              <p class="privacy-line">Private on your device.</p>
+            </div>
+            <div class="daily-stats" aria-label="Today summary">
+              <article>
+                <strong id="completedCount">0</strong>
+                <span>wins</span>
+              </article>
+              <article>
+                <strong id="remainingCount">6</strong>
+                <span>left</span>
+              </article>
+              <article>
+                <strong id="dayMood">Hopeful</strong>
+                <span>mood</span>
+              </article>
+            </div>
+          </section>
+
+          <section class="breath-card">
+            <div class="boost-icon" aria-hidden="true">☀️</div>
+            <div>
+              <span class="label">Start bright</span>
+              <h2>First, take one slow breath.</h2>
+              <p>Relax your shoulders, breathe out gently, then press the button to begin.</p>
+            </div>
+            <button class="primary-button breathing-cta" id="breathButton" type="button">
+              <span class="button-kicker">After your breath</span>
+              <span>Press here when ready</span>
+            </button>
+          </section>
+
           <section class="support-strip" aria-label="Quick access to support">
             <div>
               <span class="label">Support</span>
               <strong>Support is one tap away.</strong>
-              <p>Quiet routes, local numbers and safe options if today needs more.</p>
+              <p>Quiet routes, local numbers and safer options if today needs more.</p>
             </div>
-            <button class="support-strip-button" data-open-tab="crisis" type="button">Open support</button>
+            <button class="secondary-button" data-open-tab="crisis" type="button">Open support</button>
           </section>
 
-          <section class="card mood-card">
+          <section class="feature-grid" aria-label="App features">
+            <button class="feature-card" data-open-tab="mood" type="button">
+              <span class="feature-icon">😊</span>
+              <strong>Mood check-in</strong>
+              <small>Pick how you feel right now.</small>
+            </button>
+            <button class="feature-card" data-open-tab="wins" type="button">
+              <span class="feature-icon">✓</span>
+              <strong>Daily wins</strong>
+              <small>Tick off small positive steps.</small>
+            </button>
+            <button class="feature-card" data-open-tab="journal" type="button">
+              <span class="feature-icon">✍️</span>
+              <strong>Journal</strong>
+              <small>Write and save your day privately.</small>
+            </button>
+            <button class="feature-card" data-open-tab="history" type="button">
+              <span class="feature-icon">📅</span>
+              <strong>History</strong>
+              <small>Look back at weeks and months.</small>
+            </button>
+            <button class="feature-card feature-card-wide" data-open-tab="share" type="button">
+              <span class="feature-icon">↗</span>
+              <strong>Send link</strong>
+              <small>Share the app link and give the access code separately.</small>
+            </button>
+          </section>
+
+          <section class="card celebration-card">
+            <span class="label">Today’s reminder</span>
+            <h2 id="celebrationTitle">You’re allowed to count the small stuff.</h2>
+            <p id="celebrationText">This app is about noticing progress, not being perfect.</p>
+          </section>
+        </section>
+
+        <section class="tab-panel screen-panel mood-screen" id="moodPanel">
+          <div class="screen-title-row">
             <div>
-              <span class="label">Right now</span>
+              <span class="label">Mood check-in</span>
               <h2>How are you feeling?</h2>
               <p>Pick one emoji. No judgement — it just helps your day feel seen.</p>
             </div>
+          </div>
+
+          <section class="card mood-card">
             <div class="mood-grid" id="moodGrid" aria-label="Choose your current mood"></div>
+          </section>
+
+          <section class="card gentle-note">
+            <span class="label">Tiny truth</span>
+            <h3>However you feel, you are still allowed a good moment.</h3>
+            <p>This check-in is not a test. It is just a quick way to notice where you are.</p>
           </section>
         </section>
 
-        <section class="card boost-card">
-          <div class="boost-icon" aria-hidden="true">☀️</div>
-          <div>
-            <span class="label">Start bright</span>
-            <h2>First, take one slow breath.</h2>
-            <p>Relax your shoulders, breathe out gently, then press the button to start your positive day.</p>
-          </div>
-          <button class="primary-button breathing-cta" id="breathButton">
-            <span class="button-kicker">After your breath</span>
-            <span>Press here when ready</span>
-          </button>
-        </section>
-
-        <section class="section-head">
-          <div>
-            <span class="label">Positive tick list</span>
-            <h2>Easy wins to collect today</h2>
-          </div>
-          <button class="soft-button" id="resetButton">Fresh start</button>
-        </section>
-
-        <section class="checklist" id="checklist" aria-live="polite"></section>
-
-        <form class="add-card" id="addForm">
-          <label for="newTask">Add your own win</label>
-          <div class="add-row">
-            <input id="newTask" type="text" maxlength="80" placeholder="e.g. Put on a favourite song" autocomplete="off" />
-            <button type="submit">Add win</button>
-          </div>
-        </form>
-
-        <section class="card journal-launch-card">
-          <div class="journal-launch-copy">
-            <span class="label">Journal</span>
-            <h2>Open your journal page</h2>
-            <p>Write a positive note or use your private journal for today. It opens on its own screen so it feels quieter and easier to use.</p>
-          </div>
-          <button class="primary-button journal-launch-button" data-open-tab="journal" type="button">Open journal</button>
-        </section>
-
-        <section class="card celebration-card" id="celebrationCard">
-          <span class="label">Little reminder</span>
-          <h2 id="celebrationTitle">You’re allowed to count the small stuff.</h2>
-          <p id="celebrationText">This app is about noticing progress, not being perfect.</p>
-        </section>
-      </section>
-
-      <section class="tab-panel screen-panel journal-screen" id="journalPanel">
-        <section class="card journal-screen-hero">
-          <div>
-            <span class="label">Journal</span>
-            <h2>Your quiet journal screen</h2>
-            <p>Save a small positive note, then write anything else you need for today. Both stay private on this device.</p>
-          </div>
-          <button class="home-return-button" data-open-tab="today" type="button">Back home</button>
-        </section>
-
-
-        <section class="card journal-card">
-          <div class="section-head compact">
+        <section class="tab-panel screen-panel wins-screen" id="winsPanel">
+          <div class="screen-title-row">
             <div>
-              <span class="label">Positive journal</span>
-              <h2 id="journalPrompt">What’s one thing I can feel good about today?</h2>
+              <span class="label">Daily wins</span>
+              <h2>Easy wins to collect today</h2>
+              <p>Small steps, simple ticks, no pressure.</p>
             </div>
-            <button class="prompt-button" id="promptButton" type="button">New prompt</button>
           </div>
 
-          <textarea id="journalText" rows="6" placeholder="Write one tiny positive thing. It can be as simple as: I got through the morning, I drank water, I smiled at something, or I kept going."></textarea>
-
-          <div class="journal-actions">
-            <span id="wordCount">0 words</span>
-            <button class="primary-button small-save" id="positiveSaveButton" type="button">Save positive note</button>
-          </div>
-          <p class="save-status" id="saveStatus">Saved privately on this device.</p>
-        </section>
-
-        <section class="card personal-card">
-          <div class="section-head compact">
+          <section class="progress-summary-card">
             <div>
-              <span class="label">Personal journal</span>
-              <h2>Your private page for this day</h2>
+              <strong id="winsProgressCopy">Small wins matter.</strong>
+              <p>Use the list as a gentle starting point. Add your own if you want.</p>
             </div>
-            <input class="date-input" id="journalDate" type="date" />
-          </div>
+            <button class="soft-button" id="resetButton" type="button">Fresh start</button>
+          </section>
 
-          <div class="journal-day-summary" id="journalDaySummary"></div>
+          <section class="checklist" id="checklist" aria-live="polite"></section>
 
-          <label class="field-label" for="personalJournalText">Write anything you need to get out, remember, or celebrate.</label>
-          <textarea id="personalJournalText" rows="10" placeholder="This is your space. Big thoughts, tiny thoughts, messy thoughts, proud thoughts — they all belong here."></textarea>
-
-          <div class="journal-actions">
-            <span id="personalWordCount">0 words</span>
-            <button class="primary-button small-save" id="personalSaveButton" type="button">Save journal</button>
-          </div>
-          <p class="save-status" id="personalSaveStatus">Saved privately on this device.</p>
-        </section>
-        <section class="card privacy-card">
-          <span class="label">Privacy lock</span>
-          <h2>Optional PIN for this device</h2>
-          <p>A PIN can help keep your journal private if someone opens the app on your phone. It is a simple local lock, not bank-level security.</p>
-
-          <div class="pin-row">
-            <input id="newPin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="8" placeholder="Choose 4–8 digits" autocomplete="off" />
-            <button class="primary-button small-save" id="setPinButton" type="button">Set PIN</button>
-          </div>
-
-          <div class="privacy-actions">
-            <button class="soft-button" id="lockNowButton" type="button">Lock now</button>
-            <button class="soft-button remove-pin-button" id="removePinButton" type="button">Remove PIN</button>
-          </div>
-
-          <p class="save-status" id="pinStatus">PIN lock is off.</p>
-        </section>
-      </section>
-
-      <section class="tab-panel screen-panel history-screen" id="historyPanel">
-        <section class="card summary-card">
-          <span class="label">Your glow summary</span>
-          <h2>Week and month at a glance</h2>
-          <div class="summary-grid" id="summaryGrid"></div>
+          <form class="add-card" id="addForm">
+            <label for="newTask">Add your own win</label>
+            <div class="add-row">
+              <input id="newTask" type="text" maxlength="80" placeholder="e.g. Put on a favourite song" autocomplete="off" />
+              <button type="submit">Add win</button>
+            </div>
+          </form>
         </section>
 
-        <section class="section-head">
-          <div>
-            <span class="label">Past days</span>
-            <h2>Go back to previous entries</h2>
-          </div>
-        </section>
-        <section class="history-list" id="historyList"></section>
-      </section>
-
-      <section class="tab-panel screen-panel share-screen" id="sharePanel">
-        <section class="card share-screen-card">
-          <div class="share-hero-copy">
-            <span class="label">Share</span>
-            <h2>Send You Got This privately</h2>
-            <p>Share the app link by message, WhatsApp, email, or QR. Give the access code separately.</p>
-          </div>
-
-          <div class="share-link-box" aria-label="Current app link">
-            <span>App link</span>
-            <strong id="shareUrl">Loading link…</strong>
-          </div>
-
-          <div class="share-action-grid">
-            <button class="primary-button" id="shareButton" type="button">Send link now</button>
-            <button class="soft-button" id="copyLinkButton" type="button">Copy link</button>
-          </div>
-
-          <div class="install-guide in-app-install">
-            <span class="label">Install</span>
-            <h3>Add it to the Home Screen</h3>
-            <div class="install-steps">
-              <p><strong>iPhone:</strong> open in Safari, tap Share, then Add to Home Screen.</p>
-              <p><strong>Android:</strong> open in Chrome, tap the menu, then Add to Home screen or Install app.</p>
+        <section class="tab-panel screen-panel journal-screen" id="journalPanel">
+          <div class="screen-title-row">
+            <div>
+              <span class="label">Journal</span>
+              <h2>Your private journal</h2>
+              <p>Write one positive note, then anything else you need for the day.</p>
             </div>
           </div>
 
-          <button class="home-return-button" data-open-tab="today" type="button">Back home</button>
-        </section>
-      </section>
-
-      <section class="tab-panel screen-panel support-screen" id="crisisPanel">
-        <section class="support-screen-hero">
-          <div class="support-hero-copy">
-            <span class="label">Support</span>
-            <h2>Support, organised clearly.</h2>
-            <p>Calm, practical routes for talking to someone, local options, housing worries, or safer next steps.</p>
-          </div>
-          <button class="home-return-button support-home-button" data-open-tab="today" type="button">Back home</button>
-        </section>
-
-        <section class="support-emergency-card" aria-label="Immediate support options">
-          <div>
-            <span class="support-eyebrow">Start here if it cannot wait</span>
-            <h3>Immediate help</h3>
-            <p>If there is danger, serious injury, overdose, or someone may harm themselves or someone else, use 999. For urgent mental health help in England, call 111 and choose the mental health option.</p>
-          </div>
-          <div class="support-call-row">
-            <a class="support-call urgent" href="tel:999">
-              <span>Emergency</span>
-              <strong>999</strong>
-            </a>
-            <a class="support-call calm" href="tel:111">
-              <span>NHS mental health</span>
-              <strong>111</strong>
-            </a>
-          </div>
-        </section>
-
-        <section class="support-route-grid" aria-label="Choose a support route">
-          <a class="support-route-card" href="#support-listening">
-            <span class="route-icon">💬</span>
-            <strong>Talk now</strong>
-            <small>Listening, text support and urgent mental health routes.</small>
-          </a>
-          <a class="support-route-card" href="#support-men">
-            <span class="route-icon">🧍‍♂️</span>
-            <strong>Men</strong>
-            <small>Men’s groups, suicide prevention and male domestic abuse support.</small>
-          </a>
-          <a class="support-route-card" href="#support-women">
-            <span class="route-icon">🧍‍♀️</span>
-            <strong>Women</strong>
-            <small>Domestic abuse, refuge, sexual violence and safety support.</small>
-          </a>
-          <a class="support-route-card" href="#support-housing">
-            <span class="route-icon">🏠</span>
-            <strong>Housing tonight</strong>
-            <small>Skipton, Keighley, Craven, Bradford and national housing advice.</small>
-          </a>
-        </section>
-
-        <section class="support-section" id="support-listening">
-          <div class="support-section-title">
-            <span class="label">Talk now</span>
-            <h2>Someone to speak to</h2>
-            <p>Quick options when a person feels overwhelmed, unsafe, or does not know what to do next.</p>
-          </div>
-
-          <div class="support-resource-grid">
-            <article class="support-resource-card featured">
-              <div class="resource-topline">
-                <span class="resource-badge local">Local 24/7</span>
-                <span class="resource-icon">🌙</span>
+          <section class="card journal-card">
+            <div class="section-head compact">
+              <div>
+                <span class="label">Positive journal</span>
+                <h2 id="journalPrompt">What’s one thing I can feel good about today?</h2>
               </div>
-              <h3>First Response — Bradford, Airedale, Wharfedale & Craven</h3>
-              <p>Local urgent mental health support covering Bradford, Airedale, Wharfedale and Craven, including Keighley and Skipton areas.</p>
-              <a class="resource-action" href="tel:08009521181">0800 952 1181</a>
-            </article>
+              <button class="prompt-button" id="promptButton" type="button">New prompt</button>
+            </div>
 
-            <article class="support-resource-card">
-              <div class="resource-topline">
-                <span class="resource-badge everyone">Everyone</span>
-                <span class="resource-icon">☎️</span>
-              </div>
-              <h3>Samaritans</h3>
-              <p>Free listening support, day or night. Good when someone needs to talk and be heard without judgement.</p>
-              <a class="resource-action" href="tel:116123">116 123</a>
-            </article>
+            <textarea id="journalText" rows="6" placeholder="Write one tiny positive thing. It can be as simple as: I got through the morning, I drank water, I smiled at something, or I kept going."></textarea>
 
-            <article class="support-resource-card">
-              <div class="resource-topline">
-                <span class="resource-badge everyone">Text</span>
-                <span class="resource-icon">✉️</span>
-              </div>
-              <h3>Shout text support</h3>
-              <p>Free confidential text support across the UK. Useful when speaking out loud feels too much.</p>
-              <a class="resource-action" href="sms:85258?body=SHOUT">Text SHOUT</a>
-            </article>
+            <div class="journal-actions">
+              <span id="wordCount">0 words</span>
+              <button class="primary-button small-save" id="positiveSaveButton" type="button">Save positive note</button>
+            </div>
+            <p class="save-status" id="saveStatus">Saved privately on this device.</p>
+          </section>
 
-            <article class="support-resource-card">
-              <div class="resource-topline">
-                <span class="resource-badge local">Local</span>
-                <span class="resource-icon">🤝</span>
+          <section class="card personal-card">
+            <div class="section-head compact">
+              <div>
+                <span class="label">Personal journal</span>
+                <h2>Your page for this day</h2>
               </div>
-              <h3>Safe Spaces</h3>
-              <p>Community support across Bradford District and Craven. Access through First Response and ask for “Safe Spaces”.</p>
-              <a class="resource-action" href="tel:08009521181">Call First Response</a>
-            </article>
-          </div>
+              <input class="date-input" id="journalDate" type="date" />
+            </div>
+
+            <div class="journal-day-summary" id="journalDaySummary"></div>
+
+            <label class="field-label" for="personalJournalText">Write anything you need to get out, remember, or celebrate.</label>
+            <textarea id="personalJournalText" rows="10" placeholder="This is your space. Big thoughts, tiny thoughts, messy thoughts, proud thoughts — they all belong here."></textarea>
+
+            <div class="journal-actions">
+              <span id="personalWordCount">0 words</span>
+              <button class="primary-button small-save" id="personalSaveButton" type="button">Save journal</button>
+            </div>
+            <p class="save-status" id="personalSaveStatus">Saved privately on this device.</p>
+          </section>
+
+          <section class="card privacy-card">
+            <span class="label">Privacy lock</span>
+            <h2>Optional PIN for this device</h2>
+            <p>A PIN can help keep your journal private if someone opens the app on your phone. It is a simple local lock, not bank-level security.</p>
+
+            <div class="pin-row">
+              <input id="newPin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="8" placeholder="Choose 4–8 digits" autocomplete="off" />
+              <button class="primary-button small-save" id="setPinButton" type="button">Set PIN</button>
+            </div>
+
+            <div class="privacy-actions">
+              <button class="soft-button" id="lockNowButton" type="button">Lock now</button>
+              <button class="soft-button remove-pin-button" id="removePinButton" type="button">Remove PIN</button>
+            </div>
+
+            <p class="save-status" id="pinStatus">PIN lock is off.</p>
+          </section>
         </section>
 
-        <section class="support-section" id="support-men">
-          <div class="support-section-title">
-            <span class="label">Men</span>
-            <h2>Support options for men</h2>
-            <p>For follow-up support, difficult conversations, domestic abuse, and moments where someone needs another route.</p>
+        <section class="tab-panel screen-panel history-screen" id="historyPanel">
+          <div class="screen-title-row">
+            <div>
+              <span class="label">History</span>
+              <h2>Your week and month</h2>
+              <p>Look back at saved moods, wins and journal days.</p>
+            </div>
           </div>
 
-          <div class="support-resource-grid">
-            <article class="support-resource-card featured">
-              <div class="resource-topline">
-                <span class="resource-badge male">Men 18+</span>
-                <span class="resource-icon">☕</span>
-              </div>
-              <h3>ANDYSMANCLUB</h3>
-              <p>Free peer-to-peer talking groups for men. Useful for ongoing support after immediate safety has been dealt with.</p>
-              <a class="resource-action" href="https://andysmanclub.co.uk/groups/" target="_blank" rel="noopener">Find a group</a>
-            </article>
+          <section class="card summary-card">
+            <span class="label">At a glance</span>
+            <h2>Summary</h2>
+            <div class="summary-grid" id="summaryGrid"></div>
+          </section>
 
-            <article class="support-resource-card">
-              <div class="resource-topline">
-                <span class="resource-badge male">Suicide prevention</span>
-                <span class="resource-icon">🧡</span>
-              </div>
-              <h3>CALM</h3>
-              <p>Suicide prevention support for anyone affected by suicide or suicidal thoughts.</p>
-              <a class="resource-action" href="tel:0800585858">0800 58 58 58</a>
-            </article>
-
-            <article class="support-resource-card">
-              <div class="resource-topline">
-                <span class="resource-badge male">Domestic abuse</span>
-                <span class="resource-icon">🛡️</span>
-              </div>
-              <h3>Men’s Advice Line</h3>
-              <p>Confidential advice and emotional support for male victims of domestic abuse, including men with children.</p>
-              <a class="resource-action" href="tel:08088010327">0808 801 0327</a>
-            </article>
-
-            <article class="support-resource-card">
-              <div class="resource-topline">
-                <span class="resource-badge male">Domestic abuse</span>
-                <span class="resource-icon">🛟</span>
-              </div>
-              <h3>ManKind Initiative</h3>
-              <p>National helpline and signposting service for male victims of domestic abuse and people supporting them.</p>
-              <a class="resource-action" href="tel:01823334244">01823 334 244</a>
-            </article>
-          </div>
+          <section class="section-head">
+            <div>
+              <span class="label">Past days</span>
+              <h2>Previous entries</h2>
+            </div>
+          </section>
+          <section class="history-list" id="historyList"></section>
         </section>
 
-        <section class="support-section" id="support-women">
-          <div class="support-section-title">
-            <span class="label">Women</span>
-            <h2>Support options for women</h2>
-            <p>Routes for domestic abuse, refuge information, sexual violence support and local safety advice.</p>
+        <section class="tab-panel screen-panel share-screen" id="sharePanel">
+          <div class="screen-title-row">
+            <div>
+              <span class="label">Send link</span>
+              <h2>Share You Got This</h2>
+              <p>Send the app link by message, WhatsApp, email, or QR. Give the access code separately.</p>
+            </div>
           </div>
 
-          <div class="support-resource-grid">
-            <article class="support-resource-card featured">
-              <div class="resource-topline">
-                <span class="resource-badge female">24-hour</span>
-                <span class="resource-icon">🕊️</span>
-              </div>
-              <h3>National Domestic Abuse Helpline</h3>
-              <p>Free, confidential support for women experiencing domestic abuse, run by Refuge.</p>
-              <a class="resource-action" href="tel:08082000247">0808 2000 247</a>
-            </article>
+          <section class="card share-screen-card">
+            <div class="share-link-box" aria-label="Current app link">
+              <span>App link</span>
+              <strong id="shareUrl">Loading link…</strong>
+            </div>
 
-            <article class="support-resource-card">
-              <div class="resource-topline">
-                <span class="resource-badge female">Accommodation</span>
-                <span class="resource-icon">🏡</span>
-              </div>
-              <h3>Staying Put accommodation — Bradford District</h3>
-              <p>Safe accommodation routes for single women or women with children, including refuge and dispersed properties.</p>
-              <a class="resource-action" href="https://stayingput.org.uk/accommodation/" target="_blank" rel="noopener">Accommodation info</a>
-            </article>
+            <div class="share-action-grid">
+              <button class="primary-button" id="shareButton" type="button">Send link now</button>
+              <button class="secondary-button" id="copyLinkButton" type="button">Copy link</button>
+            </div>
 
-            <article class="support-resource-card">
-              <div class="resource-topline">
-                <span class="resource-badge female">Sexual violence</span>
-                <span class="resource-icon">🌷</span>
+            <div class="install-guide in-app-install">
+              <span class="label">Install</span>
+              <h3>Add it to the Home Screen</h3>
+              <div class="install-steps">
+                <p><strong>iPhone:</strong> open in Safari, tap Share, then Add to Home Screen.</p>
+                <p><strong>Android:</strong> open in Chrome, tap the menu, then Add to Home screen or Install app.</p>
               </div>
-              <h3>Bradford Rape Crisis & Sexual Abuse Survivors Service</h3>
-              <p>Specialist sexual violence support services for women and girls, predominantly those aged 13 and over.</p>
-              <a class="resource-action" href="tel:08004480710">0800 448 0710</a>
-            </article>
-
-            <article class="support-resource-card">
-              <div class="resource-topline">
-                <span class="resource-badge local">North Yorkshire</span>
-                <span class="resource-icon">🤍</span>
-              </div>
-              <h3>IDAS — North Yorkshire</h3>
-              <p>Specialist domestic abuse and sexual violence support across North Yorkshire.</p>
-              <a class="resource-action" href="https://idas.org.uk/" target="_blank" rel="noopener">Open IDAS</a>
-            </article>
-          </div>
+            </div>
+          </section>
         </section>
 
-        <section class="support-section" id="support-housing">
-          <div class="support-section-title">
-            <span class="label">Somewhere safe</span>
-            <h2>Housing and emergency accommodation</h2>
-            <p>Use these when someone has nowhere safe to sleep tonight or may lose their accommodation.</p>
+        <section class="tab-panel screen-panel support-screen" id="crisisPanel">
+          <div class="screen-title-row">
+            <div>
+              <span class="label">Support</span>
+              <h2>Support, quietly here.</h2>
+              <p>Calm, practical routes for talking to someone, local options, housing worries, or safer next steps.</p>
+            </div>
           </div>
 
-          <div class="support-resource-grid">
-            <article class="support-resource-card featured">
-              <div class="resource-topline">
-                <span class="resource-badge local">Skipton / Craven</span>
-                <span class="resource-icon">🏠</span>
-              </div>
-              <h3>North Yorkshire Council</h3>
-              <p>For homelessness or risk of homelessness in North Yorkshire, including Skipton and Craven.</p>
-              <a class="resource-action" href="tel:03001312131">0300 131 2131</a>
-            </article>
+          <section class="support-hero-card">
+            <div>
+              <span class="label">Need support now?</span>
+              <h3>Start with the safest next step.</h3>
+              <p>If someone is in immediate danger, seriously injured, or may harm themselves or someone else, use emergency help.</p>
+            </div>
+            <div class="support-call-row">
+              <a class="support-call urgent" href="tel:999">
+                <span>Emergency</span>
+                <strong>999</strong>
+              </a>
+              <a class="support-call" href="tel:111">
+                <span>NHS urgent help</span>
+                <strong>111</strong>
+              </a>
+            </div>
+          </section>
 
-            <article class="support-resource-card featured">
-              <div class="resource-topline">
-                <span class="resource-badge local">Keighley / Bradford</span>
-                <span class="resource-icon">🏘️</span>
-              </div>
-              <h3>Bradford Council Housing Options</h3>
-              <p>For nowhere to sleep tonight in Bradford District, including Keighley. Use out-of-hours number when offices are closed.</p>
-              <div class="resource-action-stack">
+          <section class="support-section">
+            <div class="support-section-title">
+              <span class="label">Talk to someone</span>
+              <h2>Someone to speak to</h2>
+              <p>Listening, text support and urgent mental health routes.</p>
+            </div>
+
+            <div class="support-resource-grid">
+              <article class="support-resource-card featured">
+                <div class="resource-topline">
+                  <span class="resource-badge local">Local 24/7</span>
+                  <span class="resource-icon">🌙</span>
+                </div>
+                <h3>First Response — Bradford, Airedale, Wharfedale & Craven</h3>
+                <p>Urgent local mental health support covering Keighley, Skipton and nearby areas.</p>
+                <a class="resource-action" href="tel:08009521181">0800 952 1181</a>
+              </article>
+
+              <article class="support-resource-card">
+                <div class="resource-topline">
+                  <span class="resource-badge">Any time</span>
+                  <span class="resource-icon">💬</span>
+                </div>
+                <h3>Samaritans</h3>
+                <p>Free listening support, day or night, for anyone who needs to talk.</p>
+                <a class="resource-action" href="tel:116123">116 123</a>
+              </article>
+
+              <article class="support-resource-card">
+                <div class="resource-topline">
+                  <span class="resource-badge">Text</span>
+                  <span class="resource-icon">📱</span>
+                </div>
+                <h3>Shout</h3>
+                <p>Text support if speaking out loud feels hard.</p>
+                <a class="resource-action" href="sms:85258&body=SHOUT">Text SHOUT to 85258</a>
+              </article>
+
+              <article class="support-resource-card">
+                <div class="resource-topline">
+                  <span class="resource-badge">Men</span>
+                  <span class="resource-icon">🧡</span>
+                </div>
+                <h3>CALM</h3>
+                <p>Support and suicide prevention, especially for men and anyone who feels at breaking point.</p>
+                <a class="resource-action" href="tel:0800585858">0800 58 58 58</a>
+              </article>
+            </div>
+          </section>
+
+          <section class="support-section">
+            <div class="support-section-title">
+              <span class="label">Useful UK support options</span>
+              <h2>Men, women and safe routes</h2>
+              <p>Options that can fit different situations without making the screen feel alarming.</p>
+            </div>
+
+            <div class="support-resource-grid">
+              <article class="support-resource-card">
+                <div class="resource-topline">
+                  <span class="resource-badge">Men</span>
+                  <span class="resource-icon">🧍‍♂️</span>
+                </div>
+                <h3>ANDYSMANCLUB</h3>
+                <p>Free peer-to-peer talking groups for men. Useful for ongoing support and connection.</p>
+                <a class="resource-action" href="https://andysmanclub.co.uk" target="_blank" rel="noopener">Open website</a>
+              </article>
+
+              <article class="support-resource-card">
+                <div class="resource-topline">
+                  <span class="resource-badge">Men</span>
+                  <span class="resource-icon">🛡️</span>
+                </div>
+                <h3>Men’s Advice Line</h3>
+                <p>Confidential support for male victims of domestic abuse.</p>
+                <a class="resource-action" href="tel:08088010327">0808 801 0327</a>
+              </article>
+
+              <article class="support-resource-card">
+                <div class="resource-topline">
+                  <span class="resource-badge">Women</span>
+                  <span class="resource-icon">🧍‍♀️</span>
+                </div>
+                <h3>National Domestic Abuse Helpline</h3>
+                <p>Free confidential support, refuge routes and safety advice.</p>
+                <a class="resource-action" href="tel:08082000247">0808 2000 247</a>
+              </article>
+
+              <article class="support-resource-card">
+                <div class="resource-topline">
+                  <span class="resource-badge local">Local</span>
+                  <span class="resource-icon">🏠</span>
+                </div>
+                <h3>Staying Put</h3>
+                <p>Domestic abuse and sexual violence support across Bradford District.</p>
+                <a class="resource-action" href="https://stayingput.org.uk" target="_blank" rel="noopener">Open website</a>
+              </article>
+            </div>
+          </section>
+
+          <section class="support-section">
+            <div class="support-section-title">
+              <span class="label">Emergency help</span>
+              <h2>Housing tonight</h2>
+              <p>Routes for someone who may not have somewhere safe to stay.</p>
+            </div>
+
+            <div class="support-resource-grid">
+              <article class="support-resource-card featured">
+                <div class="resource-topline">
+                  <span class="resource-badge local">Skipton / Craven</span>
+                  <span class="resource-icon">🏡</span>
+                </div>
+                <h3>North Yorkshire Council homelessness support</h3>
+                <p>For anyone homeless or at risk of homelessness in the North Yorkshire area.</p>
+                <a class="resource-action" href="tel:03001312131">0300 131 2131</a>
+              </article>
+
+              <article class="support-resource-card">
+                <div class="resource-topline">
+                  <span class="resource-badge local">Keighley / Bradford</span>
+                  <span class="resource-icon">🏘️</span>
+                </div>
+                <h3>Bradford Housing Options</h3>
+                <p>For housing advice, homelessness and emergency accommodation routes in Bradford District.</p>
                 <a class="resource-action" href="tel:01274435999">01274 435999</a>
-                <a class="resource-action secondary" href="tel:01274381999">Out of hours: 01274 381999</a>
-              </div>
-            </article>
+              </article>
 
-            <article class="support-resource-card">
-              <div class="resource-topline">
-                <span class="resource-badge local">Skipton</span>
-                <span class="resource-icon">🧭</span>
-              </div>
-              <h3>Craven Rough Sleeper Pathway — Horton Housing</h3>
-              <p>Skipton-based support for single people aged 18+ who are homeless, sleeping rough, or at risk.</p>
-              <a class="resource-action" href="tel:01756794882">01756 794882</a>
-            </article>
+              <article class="support-resource-card">
+                <div class="resource-topline">
+                  <span class="resource-badge local">Out of hours</span>
+                  <span class="resource-icon">🌙</span>
+                </div>
+                <h3>Bradford emergency out-of-hours</h3>
+                <p>Use when the usual office is closed and someone needs urgent housing support.</p>
+                <a class="resource-action" href="tel:01274381999">01274 381999</a>
+              </article>
 
-            <article class="support-resource-card">
-              <div class="resource-topline">
-                <span class="resource-badge everyone">National</span>
-                <span class="resource-icon">📍</span>
-              </div>
-              <h3>Shelter emergency housing advice</h3>
-              <p>National emergency housing advice if someone is homeless, has nowhere to stay tonight, or is at risk at home.</p>
-              <a class="resource-action" href="tel:08088004444">0808 800 4444</a>
-            </article>
-          </div>
+              <article class="support-resource-card">
+                <div class="resource-topline">
+                  <span class="resource-badge local">Craven</span>
+                  <span class="resource-icon">🤝</span>
+                </div>
+                <h3>Craven Rough Sleeper Pathway</h3>
+                <p>Local rough sleeper support around Skipton and Craven through Horton Housing.</p>
+                <a class="resource-action" href="tel:01756794882">01756 794882</a>
+              </article>
+            </div>
+          </section>
+
+          <section class="card call-script-card">
+            <span class="label">What to say</span>
+            <h2>A simple script</h2>
+            <p>“I’m with someone who needs support. We are in the Skipton / Keighley area. They may not be safe / may not have somewhere safe to stay tonight. What is the safest next step?”</p>
+          </section>
         </section>
+      </main>
 
-        <section class="support-script-card">
-          <span class="label">Useful words</span>
-          <h2>If calling feels hard</h2>
-          <p>“I’m with someone who needs support. We are in or near Skipton or Keighley. They may not be safe tonight. We need advice and somewhere safe to go.”</p>
-          <div class="support-script-actions">
-            <button class="home-return-button" data-open-tab="today" type="button">Back home</button>
-            <a class="resource-action" href="tel:08009521181">Call First Response</a>
-          </div>
-          <p class="support-disclaimer">Support details should be checked regularly before sharing widely. Journal data stays on this device.</p>
-        </section>
-      </section>
-
-    </main>
-
-    <nav class="bottom-bar" aria-label="App summary">
-      <div>
-        <strong id="completedCount">0</strong>
-        <span>wins</span>
-      </div>
-      <div>
-        <strong id="remainingCount">0</strong>
-        <span>left</span>
-      </div>
-      <div>
-        <strong id="dayMood">Hopeful</strong>
-        <span>vibe</span>
-      </div>
-    </nav>
-
-    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
   </div>
 
   <template id="taskTemplate">
