@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-screen="today">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -64,7 +64,7 @@
   </div>
 
   <div class="app-shell">
-    <header class="hero">
+    <header class="app-header">
       <nav class="tab-bar" aria-label="Main sections">
         <button class="tab-button active home-tab" data-tab="today" type="button">Home</button>
         <button class="tab-button" data-tab="journal" type="button">Journal</button>
@@ -72,58 +72,61 @@
       </nav>
 
       <div class="top-actions" aria-label="Quick actions">
-        <button class="top-action-button share-quick" id="shareButton" type="button">Send link</button>
+        <button class="top-action-button share-quick" data-open-tab="share" type="button">Send link</button>
         <button class="top-action-button support-quick" data-open-tab="crisis" type="button">Support</button>
       </div>
-
-      <div class="hero-top">
-        <div>
-          <p class="eyebrow">You Got This</p>
-          <h1>You got this.</h1>
-        </div>
-        <button class="icon-button theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
-          <span class="theme-icon" aria-hidden="true">☾</span>
-          <span class="theme-label">Dark mode</span>
-        </button>
-      </div>
-
-      <section class="hero-card">
-        <div>
-          <span class="label">Today’s good energy</span>
-          <strong id="todayLabel">Loading…</strong>
-          <p id="dailyAffirmation">Small steps count. Every single one.</p><p class="privacy-line">Private on your device.</p>
-        </div>
-
-        <div class="progress-ring" aria-label="Daily completion progress">
-          <svg viewBox="0 0 44 44" role="img" aria-hidden="true">
-            <circle class="ring-bg" cx="22" cy="22" r="18"></circle>
-            <circle class="ring-fill" id="ringFill" cx="22" cy="22" r="18"></circle>
-          </svg>
-          <span id="progressPercent">0%</span>
-        </div>
-      </section>
-
-      <section class="support-strip" aria-label="Quick access to support">
-        <div>
-          <span class="label">Support</span>
-          <strong>Support is one tap away.</strong>
-          <p>Quiet routes, local numbers and safe options if today needs more.</p>
-        </div>
-        <button class="support-strip-button" data-open-tab="crisis" type="button">Open support</button>
-      </section>
-
-      <section class="card mood-card">
-        <div>
-          <span class="label">Right now</span>
-          <h2>How are you feeling?</h2>
-          <p>Pick one emoji. No judgement — it just helps your day feel seen.</p>
-        </div>
-        <div class="mood-grid" id="moodGrid" aria-label="Choose your current mood"></div>
-      </section>
     </header>
 
     <main>
-      <section class="tab-panel active" id="todayPanel">
+      <section class="tab-panel active screen-panel home-screen" id="todayPanel">
+        <section class="home-hero">
+          <div class="hero-top">
+            <div>
+              <p class="eyebrow">You Got This</p>
+              <h1>You got this.</h1>
+            </div>
+            <button class="icon-button theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
+              <span class="theme-icon" aria-hidden="true">☾</span>
+              <span class="theme-label">Dark mode</span>
+            </button>
+          </div>
+
+          <section class="hero-card">
+            <div>
+              <span class="label">Today’s good energy</span>
+              <strong id="todayLabel">Loading…</strong>
+              <p id="dailyAffirmation">Small steps count. Every single one.</p>
+              <p class="privacy-line">Private on your device.</p>
+            </div>
+
+            <div class="progress-ring" aria-label="Daily completion progress">
+              <svg viewBox="0 0 44 44" role="img" aria-hidden="true">
+                <circle class="ring-bg" cx="22" cy="22" r="18"></circle>
+                <circle class="ring-fill" id="ringFill" cx="22" cy="22" r="18"></circle>
+              </svg>
+              <span id="progressPercent">0%</span>
+            </div>
+          </section>
+
+          <section class="support-strip" aria-label="Quick access to support">
+            <div>
+              <span class="label">Support</span>
+              <strong>Support is one tap away.</strong>
+              <p>Quiet routes, local numbers and safe options if today needs more.</p>
+            </div>
+            <button class="support-strip-button" data-open-tab="crisis" type="button">Open support</button>
+          </section>
+
+          <section class="card mood-card">
+            <div>
+              <span class="label">Right now</span>
+              <h2>How are you feeling?</h2>
+              <p>Pick one emoji. No judgement — it just helps your day feel seen.</p>
+            </div>
+            <div class="mood-grid" id="moodGrid" aria-label="Choose your current mood"></div>
+          </section>
+        </section>
+
         <section class="card boost-card">
           <div class="boost-icon" aria-hidden="true">☀️</div>
           <div>
@@ -171,7 +174,7 @@
         </section>
       </section>
 
-      <section class="tab-panel" id="journalPanel">
+      <section class="tab-panel screen-panel journal-screen" id="journalPanel">
         <section class="card journal-screen-hero">
           <div>
             <span class="label">Journal</span>
@@ -239,7 +242,7 @@
         </section>
       </section>
 
-      <section class="tab-panel" id="historyPanel">
+      <section class="tab-panel screen-panel history-screen" id="historyPanel">
         <section class="card summary-card">
           <span class="label">Your glow summary</span>
           <h2>Week and month at a glance</h2>
@@ -255,12 +258,43 @@
         <section class="history-list" id="historyList"></section>
       </section>
 
-      <section class="tab-panel" id="crisisPanel">
+      <section class="tab-panel screen-panel share-screen" id="sharePanel">
+        <section class="card share-screen-card">
+          <div class="share-hero-copy">
+            <span class="label">Share</span>
+            <h2>Send You Got This privately</h2>
+            <p>Share the app link by message, WhatsApp, email, or QR. Give the access code separately.</p>
+          </div>
+
+          <div class="share-link-box" aria-label="Current app link">
+            <span>App link</span>
+            <strong id="shareUrl">Loading link…</strong>
+          </div>
+
+          <div class="share-action-grid">
+            <button class="primary-button" id="shareButton" type="button">Send link now</button>
+            <button class="soft-button" id="copyLinkButton" type="button">Copy link</button>
+          </div>
+
+          <div class="install-guide in-app-install">
+            <span class="label">Install</span>
+            <h3>Add it to the Home Screen</h3>
+            <div class="install-steps">
+              <p><strong>iPhone:</strong> open in Safari, tap Share, then Add to Home Screen.</p>
+              <p><strong>Android:</strong> open in Chrome, tap the menu, then Add to Home screen or Install app.</p>
+            </div>
+          </div>
+
+          <button class="home-return-button" data-open-tab="today" type="button">Back home</button>
+        </section>
+      </section>
+
+      <section class="tab-panel screen-panel support-screen" id="crisisPanel">
         <section class="support-screen-hero">
           <div class="support-hero-copy">
             <span class="label">Support</span>
-            <h2>Quiet support, clearly organised.</h2>
-            <p>Useful routes for difficult moments, housing worries, safety concerns, or when someone needs a person to speak to.</p>
+            <h2>Support, organised clearly.</h2>
+            <p>Calm, practical routes for talking to someone, local options, housing worries, or safer next steps.</p>
           </div>
           <button class="home-return-button support-home-button" data-open-tab="today" type="button">Back home</button>
         </section>

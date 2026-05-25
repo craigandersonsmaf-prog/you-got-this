@@ -118,7 +118,7 @@ The Support tab now has clear Male support, Female support, and Anyone / emergen
 This release uses the public app name **You Got This**.
 
 
-## Latest update
+## Earlier update
 
 - Added a clear Home button/tab so users can quickly return to the daily grounding screen.
 
@@ -160,3 +160,10 @@ Security note: the PIN lock is a simple device-level privacy screen. It helps st
 This release includes the home-screen launch fix. After Vercel redeploys, open the live link in Safari/Chrome once before adding it to the home screen.
 
 If an older home-screen icon does not open, delete that old icon from the phone and add it again from the updated live link.
+
+## Latest update
+
+- Main menu stays at the very top with **Home**, **Journal**, and **History**.
+- **Journal**, **Support**, and **Send link** now open as their own dedicated screens instead of sharing the Home screen.
+- The bottom daily progress bar only shows on Home, so Journal and Support feel cleaner.
+- Desktop/PC view now keeps the app inside an iPhone-style frame instead of stretching across the browser.

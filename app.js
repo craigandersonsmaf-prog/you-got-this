@@ -82,6 +82,8 @@ const els = {
   openTabButtons: document.querySelectorAll("[data-open-tab]"),
   topActionButtons: document.querySelectorAll(".top-action-button[data-open-tab]"),
   shareButton: document.querySelector("#shareButton"),
+  copyLinkButton: document.querySelector("#copyLinkButton"),
+  shareUrl: document.querySelector("#shareUrl"),
   appAccessGate: document.querySelector("#appAccessGate"),
   accessPassword: document.querySelector("#accessPassword"),
   accessButton: document.querySelector("#accessButton"),
@@ -440,11 +442,13 @@ function renderHistory() {
 }
 
 function switchTab(tabName) {
+  document.documentElement.dataset.screen = tabName;
   els.tabButtons.forEach(button => button.classList.toggle("active", button.dataset.tab === tabName));
   els.topActionButtons.forEach(button => button.classList.toggle("active", button.dataset.openTab === tabName));
   els.tabPanels.forEach(panel => panel.classList.toggle("active", panel.id === `${tabName}Panel`));
   if (tabName === "journal") loadPersonalJournalForSelectedDate();
   if (tabName === "history") renderHistory();
+  if (tabName === "share") updateShareLinkDisplay();
 }
 
 function setTheme(theme) {
@@ -474,6 +478,19 @@ function getShareUrl() {
   return url.toString();
 }
 
+function updateShareLinkDisplay() {
+  if (els.shareUrl) els.shareUrl.textContent = getShareUrl();
+}
+
+async function copyAppLink() {
+  try {
+    await navigator.clipboard.writeText(getShareUrl());
+    showToast("Link copied. Give the access code separately.");
+  } catch {
+    showToast("Could not copy just now. Copy the address from the browser.");
+  }
+}
+
 async function shareAppLink() {
   const shareData = {
     title: "You Got This",
@@ -492,6 +509,12 @@ async function shareAppLink() {
   } catch {
     showToast("Could not send link just now. Copy the address from the browser.");
   }
+}
+
+function setDeviceMode() {
+  const isDesktopWidth = window.matchMedia("(min-width: 760px)").matches;
+  document.documentElement.classList.toggle("device-desktop", isDesktopWidth);
+  document.documentElement.classList.toggle("device-mobile", !isDesktopWidth);
 }
 
 function makeSalt() {
@@ -663,7 +686,7 @@ els.tabButtons.forEach(button => {
 els.openTabButtons.forEach(button => {
   button.addEventListener("click", () => {
     switchTab(button.dataset.openTab);
-    document.querySelector(".tab-bar").scrollIntoView({ behavior: "smooth", block: "start" });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
 });
 
@@ -740,7 +763,8 @@ els.themeToggle.addEventListener("click", () => {
   setTheme(isDark ? "light" : "dark");
 });
 
-els.shareButton.addEventListener("click", shareAppLink);
+els.shareButton?.addEventListener("click", shareAppLink);
+els.copyLinkButton?.addEventListener("click", copyAppLink);
 
 els.accessButton?.addEventListener("click", unlockAppAccess);
 
@@ -771,6 +795,8 @@ if ("serviceWorker" in navigator) {
   });
 }
 
+setDeviceMode();
+window.addEventListener("resize", setDeviceMode);
 initTheme();
 const appAccessReady = initAppAccessGate();
 updatePrivacyUi();
@@ -779,4 +805,5 @@ els.journalDate.value = selectedJournalDate;
 renderToday();
 loadPersonalJournalForSelectedDate();
 renderHistory();
+updateShareLinkDisplay();
 if (state.checkedIn) els.breathButton.innerHTML = '<span class="button-kicker">Nice. Breath done.</span><span>You’ve got this.</span>';
