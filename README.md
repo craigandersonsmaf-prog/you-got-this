@@ -21,6 +21,7 @@ A positive, mobile-first Progressive Web App for helping people feel grounded th
 - Shared access code gate before the app opens
 - Useful support numbers visible on the lock screen
 - Ready for Vercel static deployment
+- Responsive desktop layout that turns the app into a polished two-column dashboard on PC
 
 
 ## Shared access code

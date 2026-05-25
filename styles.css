@@ -2475,3 +2475,329 @@ html[data-screen="share"] .bottom-bar {
     align-items: stretch;
   }
 }
+
+
+/* Desktop / PC responsive polish
+   Mobile keeps the iPhone-style single screen.
+   Wider screens become a polished dashboard so the app is not one long line. */
+@media (min-width: 860px) {
+  body {
+    display: block;
+    min-height: 100vh;
+    padding: 0 28px 34px;
+  }
+
+  .sky-glow {
+    background:
+      radial-gradient(circle at 18% 10%, rgba(255, 209, 102, 0.42), transparent 30rem),
+      radial-gradient(circle at 80% 8%, rgba(255, 179, 199, 0.30), transparent 31rem),
+      radial-gradient(circle at 50% 110%, rgba(126, 214, 165, 0.24), transparent 34rem);
+  }
+
+  .app-shell {
+    width: min(1180px, calc(100vw - 56px));
+    max-width: 1180px;
+    min-height: calc(100vh - 56px);
+    margin: 28px auto;
+    padding: 22px 24px 118px;
+    border-radius: 44px;
+    overflow: visible;
+  }
+
+  .app-header {
+    grid-template-columns: minmax(360px, 1fr) minmax(280px, 0.62fr);
+    align-items: center;
+    gap: 12px;
+    top: 16px;
+    margin-bottom: 20px;
+  }
+
+  .tab-bar,
+  .top-actions {
+    margin: 0;
+  }
+
+  .tab-button,
+  .top-action-button {
+    min-height: 48px;
+  }
+
+  main,
+  .tab-panel.active,
+  .screen-panel.active {
+    display: block;
+  }
+
+  .home-screen.active {
+    display: grid;
+    grid-template-columns: minmax(330px, 0.78fr) minmax(480px, 1.22fr);
+    gap: 20px;
+    align-items: start;
+  }
+
+  .home-hero {
+    grid-column: 1;
+    grid-row: 1 / span 4;
+    position: sticky;
+    top: 116px;
+    align-self: start;
+  }
+
+  .home-screen .boost-card,
+  .home-screen .section-head,
+  .home-screen .checklist,
+  .home-screen .add-card {
+    grid-column: 2;
+  }
+
+  .home-screen .journal-launch-card,
+  .home-screen .celebration-card {
+    grid-column: 1;
+  }
+
+  .home-screen .boost-card {
+    margin-top: 0;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 16px;
+  }
+
+  .home-screen .boost-card .breathing-cta {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .home-screen .section-head {
+    margin: 0;
+  }
+
+  .checklist {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .task-card {
+    min-height: 118px;
+    align-items: flex-start;
+  }
+
+  .add-card,
+  .journal-launch-card,
+  .celebration-card,
+  .mood-card,
+  .hero-card,
+  .support-strip,
+  .boost-card {
+    box-shadow: var(--premium-shadow, var(--shadow));
+  }
+
+  .journal-launch-card {
+    display: grid;
+    gap: 14px;
+  }
+
+  .journal-launch-button,
+  .primary-button,
+  .primary-button.breathing-cta {
+    min-width: 0;
+  }
+
+  h1 {
+    font-size: clamp(3.35rem, 5.2vw, 5.25rem);
+  }
+
+  .hero-card {
+    min-height: 150px;
+  }
+
+  .mood-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .journal-screen.active {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    align-items: start;
+  }
+
+  .journal-screen-hero,
+  .journal-screen .privacy-card {
+    grid-column: 1 / -1;
+  }
+
+  .journal-card,
+  .personal-card {
+    margin: 0;
+    height: 100%;
+  }
+
+  .journal-card textarea,
+  .personal-card textarea {
+    min-height: 250px;
+  }
+
+  .history-screen.active {
+    display: grid;
+    grid-template-columns: minmax(320px, 0.72fr) minmax(500px, 1.28fr);
+    gap: 20px;
+    align-items: start;
+  }
+
+  .history-screen .summary-card {
+    grid-column: 1;
+    position: sticky;
+    top: 116px;
+    margin: 0;
+  }
+
+  .history-screen > .section-head,
+  .history-screen > .history-list {
+    grid-column: 2;
+  }
+
+  .history-screen > .section-head {
+    margin: 0;
+  }
+
+  .history-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .share-screen.active {
+    display: grid;
+    place-items: start center;
+  }
+
+  .share-screen-card {
+    width: min(760px, 100%);
+  }
+
+  .support-screen.active {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 20px;
+    align-items: start;
+  }
+
+  .support-screen-hero {
+    grid-column: 1 / span 4;
+    grid-row: 1 / span 2;
+    position: sticky;
+    top: 116px;
+    align-self: start;
+  }
+
+  .support-emergency-card {
+    grid-column: 5 / -1;
+    margin: 0;
+  }
+
+  .support-route-grid {
+    grid-column: 5 / -1;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin: 0;
+  }
+
+  .support-section,
+  .support-script-card {
+    grid-column: 1 / -1;
+  }
+
+  .support-resource-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .support-resource-card {
+    min-height: 230px;
+    align-content: space-between;
+  }
+
+  .support-call-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .support-script-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .bottom-bar,
+  .toast {
+    width: min(520px, calc(100vw - 80px));
+    left: 50%;
+    right: auto;
+  }
+
+  .bottom-bar {
+    transform: translateX(-50%);
+    bottom: 28px;
+  }
+
+  .toast {
+    transform: translate(-50%, 14px);
+  }
+
+  .toast.show {
+    transform: translate(-50%, 0);
+  }
+
+  .lock-card {
+    width: min(760px, calc(100vw - 56px));
+  }
+
+  .access-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.9fr);
+    gap: 16px 18px;
+  }
+
+  .access-card > .label,
+  .access-card > h2,
+  .access-card > p,
+  .access-card > .lock-input-row,
+  .access-card > .save-status {
+    grid-column: 1;
+  }
+
+  .access-card > .install-guide,
+  .access-card > .access-support {
+    grid-column: 2;
+  }
+
+  .access-card > .install-guide {
+    grid-row: 1 / span 4;
+  }
+
+  .access-card > .access-support {
+    align-self: end;
+  }
+}
+
+@media (min-width: 1180px) {
+  .home-screen.active {
+    grid-template-columns: minmax(360px, 0.74fr) minmax(620px, 1.26fr);
+  }
+
+  .home-screen .boost-card {
+    grid-template-columns: auto minmax(0, 1fr) minmax(220px, 0.45fr);
+  }
+
+  .home-screen .boost-card .breathing-cta {
+    grid-column: auto;
+    width: auto;
+  }
+
+  .checklist,
+  .history-list,
+  .support-resource-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

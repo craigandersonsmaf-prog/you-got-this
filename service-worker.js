@@ -1,4 +1,4 @@
-const CACHE_NAME = "you-got-this-release-v13-screens-desktop-polish";
+const CACHE_NAME = "you-got-this-release-v14-pc-responsive-polish";
 const APP_SHELL = "./index.html";
 const APP_ASSETS = [
   "./",
